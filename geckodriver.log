@@ -1,0 +1,72 @@
+1691628207276	geckodriver	INFO	Listening on 127.0.0.1:63696
+1691628207824	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "63697" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileeCAjzL"
+*** You are running in headless mode.
+1691628209774	Marionette	INFO	Marionette enabled
+1691628209780	Marionette	INFO	Listening on port 63704
+WebDriver BiDi listening on ws://localhost:63697
+Read port: 63704
+1691628210209	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileeCAjzL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:63697/devtools/browser/c2489197-2813-4f54-9cc3-1f3d6be9b8b4
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript warning: https://pagead2.googlesyndication.com/bg/gDKveuiD6qzElJZQWCdHL_tXbW9wBzQNLi6nE-8m1ts.js line 2 > eval line 5832 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+1691628243308	Marionette	INFO	Stopped listening on port 63704
+1691628374515	geckodriver	INFO	Listening on 127.0.0.1:60005
+1691628375041	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "60006" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileAA0dzl"
+*** You are running in headless mode.
+1691628375860	Marionette	INFO	Marionette enabled
+1691628375867	Marionette	INFO	Listening on port 60019
+WebDriver BiDi listening on ws://localhost:60006
+Read port: 60019
+1691628376227	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileAA0dzl\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60006/devtools/browser/562ce564-2b0b-46a0-80b5-7b4264fdb502
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/gDKveuiD6qzElJZQWCdHL_tXbW9wBzQNLi6nE-8m1ts.js line 2 > eval line 5239 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+1691628425093	Marionette	INFO	Stopped listening on port 60019
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
+1691628679320	geckodriver	INFO	Listening on 127.0.0.1:51024
+1691628679812	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "51025" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileF2EkxG"
+*** You are running in headless mode.
+1691628680194	Marionette	INFO	Marionette enabled
+1691628680199	Marionette	INFO	Listening on port 51032
+WebDriver BiDi listening on ws://localhost:51025
+Read port: 51032
+1691628680305	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Admin\\AppData\\Local\\Temp\\rust_mozprofileF2EkxG\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51025/devtools/browser/b2a12674-9fe0-4a88-9cdb-be5868d10dd3
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript warning: https://pagead2.googlesyndication.com/bg/gDKveuiD6qzElJZQWCdHL_tXbW9wBzQNLi6nE-8m1ts.js line 2 > eval line 1613 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript warning: https://pagead2.googlesyndication.com/bg/gDKveuiD6qzElJZQWCdHL_tXbW9wBzQNLi6nE-8m1ts.js line 2 > eval line 4409 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+JavaScript error: https://static.coingecko.com/s/application-7ab154bdcf9daea93056f0a39a0ff9c122ddb33119dbad5cc1ee53ad44b48351.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://c.amazon-adsystem.com/aax2/apstag.js, line 2: Error: Missing context object
+1691628702150	Marionette	INFO	Stopped listening on port 51032
+!!! error running onStopped callback: TypeError: callback is not a function
+[Parent 20204, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167

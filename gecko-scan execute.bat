@@ -1,0 +1,1 @@
+call all-crypto.py
