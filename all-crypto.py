@@ -61,6 +61,7 @@ for url in pages:
     driver.get(url)
     html = driver.page_source
     soup = bs(html, "html.parser")
+    soup = soup.find('div', class_='coingecko-table')
     
     df_page = extract_page(soup)
     df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
