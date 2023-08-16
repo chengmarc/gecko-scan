@@ -6,7 +6,7 @@
 """
 from colorama import init, Fore
 init()
-base_url = "https://www.coingecko.com/en/categories/layer-1"
+base_url = "https://www.coingecko.com/en/categories/smart-contract-platform"
 
 # %% Import selenium webdriver, initialize web driver
 from selenium import webdriver
@@ -105,7 +105,7 @@ output_path = config.get('Paths', 'output_path')
 import datetime
 current_datetime = datetime.datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
-output_name = "layer-1-" + formatted_datetime + ".csv"
+output_name = "smart-contract-platform-" + formatted_datetime + ".csv"
 
 df_trim.to_csv(output_path + "\\" + output_name)
 

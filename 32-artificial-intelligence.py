@@ -6,6 +6,7 @@
 """
 from colorama import init, Fore
 init()
+base_url = "https://www.coingecko.com/en/categories/artificial-intelligence"
 
 # %% Import selenium webdriver, initialize web driver
 from selenium import webdriver
@@ -51,9 +52,15 @@ print(Fore.WHITE + "Preparation for extraction is ready.")
 # %% Extract useful data, store in a clean data frame
 df_clean = pd.DataFrame(columns = ['Symbol', 'Name', 'Price', 'Change1h', 
                                    'Change24h', 'Change7d', 'Volume24h', 'MarketCap'])
-   
-base_url = "https://www.coingecko.com/en/categories/artificial-intelligence"
+
+driver.get(base_url)
+html = driver.page_source
+soup = bs(html, "html.parser").find_all('li', class_='page-item')
+total_pages = int([obj.get_text() for obj in soup][-2])
+
 pages = [base_url]
+for i in range(2, total_pages+1):
+    pages.append(base_url + "?page=" + str(i))
 
 for url in pages:  
     driver.get(url)
