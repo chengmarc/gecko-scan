@@ -1,0 +1,177 @@
+# -*- coding: utf-8 -*-
+"""
+@author: chengmarc
+@github: https://github.com/chengmarc
+
+"""
+try:
+    # Import core libraries
+    import pandas as pd
+    from bs4 import BeautifulSoup as bs
+    from selenium import webdriver
+    from selenium.webdriver.firefox.options import Options
+
+    # Import libraries for utilities
+    import os, time, datetime, configparser
+    from urllib.parse import urlparse
+    from colorama import init, Fore
+    init()
+    print(Fore.GREEN + "All libraries imported.")
+
+except ModuleNotFoundError:
+    print("Dependencies missing, please use pip to install all dependencies:")
+    print("pandas, bs4, selenium, os, time, datetime, configparser, urllib, colorama")
+    input('Press any key to quit.')
+    exit()    
+
+# %% Initialize web driver
+options = Options()
+options.headless = True
+
+try:
+    driver = webdriver.Firefox(options=options)
+    print(Fore.GREEN + "Web driver initialized.")
+
+except:
+    print(Fore.RED + "Firefox Browser missing, please install Firefox Browser.")
+    input('Press any key to quit.')
+    exit()  
+
+# %% Getting urls in the page "Categories"
+base_url = 'https://www.coingecko.com'
+driver.get('https://www.coingecko.com/en/categories')
+html = driver.page_source
+soup = bs(html, 'html.parser').find('tbody').find_all('a')
+
+categories_url = []
+for link in soup:
+    href = str(link.get('href'))
+    if "categories" in href and "ecosystem" not in href:
+        categories_url.append(base_url + href)
+categories_url = list(dict.fromkeys(categories_url))
+del soup, html, href, base_url
+
+# %% Functions for getting key information in each category
+
+def get_name(category_url:str) -> str:
+    parsed_url = urlparse(category_url)
+    basename = os.path.basename(parsed_url.path)
+    filename, extension = os.path.splitext(basename)
+    return filename
+    
+def get_num_of_pages(driver, category_url:str) -> int:
+    driver.get(category_url)
+    html = driver.page_source
+    soup = bs(html, "html.parser").find_all('li', class_='page-item')
+    num = int([obj.get_text() for obj in soup][-2])
+    return num
+
+def get_page_list(num, category_url:str) -> list[str]:
+    pages = [category_url]
+    for i in range(2, num+1):
+        pages.append(category_url + "?page=" + str(i))
+    return pages
+
+# %% Functions for data mining
+
+def extract_page(soup) -> pd.DataFrame:
+    names = soup.find_all('span', class_='lg:tw-flex font-bold tw-items-center tw-justify-between')
+    symbols = soup.find_all('span', class_='d-lg-inline font-normal text-3xs tw-ml-0 md:tw-ml-2 md:tw-self-center tw-text-gray-500 dark:tw-text-white dark:tw-text-opacity-60')
+    pricelst = soup.find_all('td', class_='td-price price text-right')
+    
+    prices = []
+    for price in pricelst:
+        prices.append(price.find('span', class_='no-wrap'))
+    
+    change1h = soup.find_all('td', class_='td-change1h change1h stat-percent text-right col-market')
+    change24h = soup.find_all('td', class_='td-change24h change24h stat-percent text-right col-market')
+    change7d = soup.find_all('td', class_='td-change7d change7d stat-percent text-right col-market')
+    volume24h = soup.find_all('td', class_='td-liquidity_score lit text-right col-market')
+    marketcap = soup.find_all('td', class_='td-market_cap cap col-market cap-price text-right')
+    
+    df = []
+    for object_lst in [symbols, names, pricelst, change1h, change24h, change7d, volume24h, marketcap]:
+        df.append([obj.get_text() for obj in object_lst])
+    
+    df = pd.DataFrame(df).transpose()
+    df.columns=['Symbol', 'Name', 'Price', 'Change1h', 'Change24h', 'Change7d', 'Volume24h', 'MarketCap']
+    return df
+
+def extract_dataframe(driver, url_lst:list[str]) -> pd.DataFrame:
+    df_clean = pd.DataFrame(columns = ['Symbol', 'Name', 'Price', 'Change1h', 
+                                       'Change24h', 'Change7d', 'Volume24h', 'MarketCap'])
+    for url in url_lst:  
+        driver.get(url)
+        html = driver.page_source
+        soup = bs(html, "html.parser").find('div', class_='coingecko-table')
+        
+        df_page = extract_page(soup)
+        df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)       
+        
+        print(Fore.WHITE + "Extracting information...")
+        time.sleep(1)    
+        
+    return df_clean
+
+def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    for column in df.columns:
+        df[column] = df[column].str.strip()
+    
+    # Remove USD currency symbol
+    df['Price'] = df['Price'].str[1:]
+    df['Volume24h'] = df['Volume24h'].str[1:]
+    df['MarketCap'] = df['MarketCap'].str[1:]    
+    return df
+
+print(Fore.WHITE + "Preparation for extraction is ready.")
+
+# %% Main Execution
+data_dictionary, reset_threshold = {}, 0
+
+try:
+    for url in categories_url:
+        category = get_name(url)
+        num = get_num_of_pages(driver, url)
+        pages = get_page_list(num, url)
+        data_dictionary[category] = extract_dataframe(driver, pages)
+        print(Fore.YELLOW + "Successfully extracted data for " + category)
+    
+        reset_threshold += 1
+        if reset_threshold == 20:
+            print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
+            reset_threshold = 0
+            time.sleep(20)           
+        
+    print(Fore.GREEN + "┏┓┓ ┓   ┳┓┏┓┏┳┓┏┓  ┳┓┏┓┏┓┳┓┓┏ ")
+    print(Fore.GREEN + "┣┫┃ ┃   ┃┃┣┫ ┃ ┣┫  ┣┫┣ ┣┫┃┃┗┫ ")
+    print(Fore.GREEN + "┛┗┗┛┗┛  ┻┛┛┗ ┻ ┛┗  ┛┗┗┛┛┗┻┛┗┛•")
+    driver.quit()
+    
+except:
+    print(Fore.RED + "Cloudflare has blocked the traffic, please try again.")
+    driver.quit()
+    
+    input(Fore.WHITE + 'Press any key to quit.')
+    exit()        
+
+# %% Export data to desired location
+script_path = os.path.realpath(__file__)
+script_dir = os.path.dirname(script_path)
+os.chdir(script_dir)
+
+config = configparser.ConfigParser()
+config.read('gecko-scan config.ini')
+output_path = config.get('Paths', 'output_path')
+
+current_datetime = datetime.datetime.now()
+formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
+
+for category, dataframe in data_dictionary.items():
+    output_name = category + '-' + formatted_datetime + ".csv"
+    dataframe.to_csv(output_path + "\\" + output_name)
+    
+print("")
+print(Fore.WHITE + "Data has been saved to desired location.")
+print(Fore.WHITE + "Quitting automatically after 5 seconds.")
+
+time.sleep(5)
