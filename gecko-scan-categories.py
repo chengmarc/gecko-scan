@@ -133,7 +133,9 @@ try:
         category = get_name(url)
         num = get_num_of_pages(driver, url)
         pages = get_page_list(num, url)
-        data_dictionary[category] = extract_dataframe(driver, pages)
+        data = extract_dataframe(driver, pages)
+        data = trim_dataframe(data)
+        data_dictionary[category] = data
         print(Fore.YELLOW + "Successfully extracted data for " + category)
     
         reset_threshold += 1
