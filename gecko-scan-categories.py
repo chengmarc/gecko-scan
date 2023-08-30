@@ -191,8 +191,8 @@ try:
         data_dictionary[category] = data
         print(Fore.YELLOW + "Successfully extracted data for " + category)
 
-        reset_threshold += 1
-        if reset_threshold == 20:
+        reset_threshold += num
+        if reset_threshold > 30:
             print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
             reset_threshold = 0
             time.sleep(20)

@@ -85,6 +85,7 @@ def extract_page(soup) -> pd.DataFrame:
 print(Fore.WHITE + "Preparation for extraction is ready.")
 
 # %% Main Execution
+reset_threshold = 0
 df_clean = pd.DataFrame(columns = ['Symbol', 'Name', 'Price', 'Change1h', 
                                    'Change24h', 'Change7d', 'Volume24h', 'MarketCap'])
 
@@ -96,6 +97,12 @@ for url in pages:
 
     df_page = extract_page(soup)
     df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
+
+    reset_threshold += 1
+    if reset_threshold > 30:
+        print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
+        reset_threshold = 0
+        time.sleep(20)
 
     print(Fore.WHITE + "Extracting information...")
     time.sleep(1)
