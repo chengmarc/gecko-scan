@@ -5,31 +5,37 @@
 
 """
 try:
+    # Import standard libraries
+    import os, time, datetime, configparser
+    from urllib.parse import urlparse
+    
     # Import core libraries
     import pandas as pd
     from bs4 import BeautifulSoup as bs
     from selenium import webdriver
     from selenium.webdriver.firefox.options import Options
-
-    # Import libraries for utilities
-    import os, time, datetime, configparser
-    from urllib.parse import urlparse
+    from selenium.webdriver.firefox.service import Service
     from colorama import init, Fore
     init()
     print(Fore.GREEN + "All libraries imported.")
 
 except:
-    print("Dependencies missing, please use pip to install all dependencies:")
-    print("pandas, bs4, selenium, os, time, datetime, configparser, urllib, colorama")
+    print("Dependencies missing, please use pip/conda to install all dependencies.")
+    print("Standard libraries:      os, time, datetime, configparser")
+    print("Core libraries:          pandas, bs4, selenium, colorama")
     input('Press any key to quit.')
     exit()
+    
+script_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(script_path)
 
 # %% Initialize web driver
 options = Options()
 options.add_argument("-headless")
+service = Service(script_path + "\geckodriver.exe")
 
 try:
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(service=service, options=options)
     print(Fore.GREEN + "Web driver initialized.")
 
 except:
@@ -213,10 +219,6 @@ except:
     exit()
 
 # %% Export data to desired location
-script_path = os.path.realpath(__file__)
-script_dir = os.path.dirname(script_path)
-os.chdir(script_dir)
-
 config = configparser.ConfigParser()
 config.read('gecko-scan config.ini')
 output_path = config.get('Paths', 'output_path')
