@@ -6,7 +6,7 @@ First, make sure to install **Git** and **Python** on your computer, see the lin
 - Git: https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.2/Git-2.42.0.2-64-bit.exe
 - Python: https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe 
 
-Second, you want to clone this repository using **Git Bash** using the line below, or simply download it as a **.zip** file and extract it.
+Second, clone this repository using **Git Bash** using the line below, or simply download it as a **.zip** file and extract it.
 ```
 git@github.com:chengmarc/gecko-scan.git
 ```
