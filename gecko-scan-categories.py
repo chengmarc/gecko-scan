@@ -57,6 +57,8 @@ for link in soup:
 categories_url = list(dict.fromkeys(categories_url))
 del soup, html, href, base_url
 
+print(Fore.WHITE + "Successfully extracted URLs.")
+
 # %% Functions for getting key information in each category
 
 def get_name(category_url:str) -> str:
@@ -159,7 +161,7 @@ def extract_dataframe(driver, url_lst:list[str]) -> pd.DataFrame:
         df_page = extract_page(soup)
         df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
 
-        print(Fore.WHITE + "Extracting information...")
+        print(Fore.WHITE, "Extracting information...")
         time.sleep(1)
 
     return df_clean
@@ -180,10 +182,22 @@ def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df['Price'] = df['Price'].str[1:]
     df['Volume24h'] = df['Volume24h'].str[1:]
     df['MarketCap'] = df['MarketCap'].str[1:]
+    
     return df
 
-print(Fore.WHITE + "Preparation for extraction is ready.")
+print(Fore.WHITE + "Preparation for download is ready.")
+print("")
 
+# %% Function for user notice
+def print_ready():
+    print("")
+    print(Fore.GREEN + "       _ _       _       _                             _       ")
+    print(Fore.GREEN + "  __ _| | |   __| | __ _| |_ __ _   _ __ ___  __ _  __| |_   _ ")
+    print(Fore.GREEN + " / _` | | |  / _` |/ _` | __/ _` | | '__/ _ \/ _` |/ _` | | | |")
+    print(Fore.GREEN + "| (_| | | | | (_| | (_| | || (_| | | | |  __/ (_| | (_| | |_| |")
+    print(Fore.GREEN + " \__,_|_|_|  \__,_|\__,_|\__\__,_| |_|  \___|\__,_|\__,_|\__, |")
+    print(Fore.GREEN + "                                                         |___/ ")
+    
 # %% Main Execution
 data_dictionary, reset_threshold = {}, 0
 
@@ -195,34 +209,36 @@ try:
         data = extract_dataframe(driver, pages)
         data = trim_dataframe(data)
         data_dictionary[category] = data
-        print(Fore.YELLOW + "Successfully extracted data for " + category)
+        print(Fore.GREEN, "Successfully extracted data for " + category)
 
         reset_threshold += num
-        if reset_threshold > 30:
+        if reset_threshold > 25:
+            print("")
             print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
+            print("")
             reset_threshold = 0
             time.sleep(20)
 
-    print(Fore.GREEN + "       _ _       _       _                             _       ")
-    print(Fore.GREEN + "  __ _| | |   __| | __ _| |_ __ _   _ __ ___  __ _  __| |_   _ ")
-    print(Fore.GREEN + " / _` | | |  / _` |/ _` | __/ _` | | '__/ _ \/ _` |/ _` | | | |")
-    print(Fore.GREEN + "| (_| | | | | (_| | (_| | || (_| | | | |  __/ (_| | (_| | |_| |")
-    print(Fore.GREEN + " \__,_|_|_|  \__,_|\__,_|\__\__,_| |_|  \___|\__,_|\__,_|\__, |")
-    print(Fore.GREEN + "                                                         |___/ ")
+    print_ready()
     driver.quit()
 
 except:
+    print("")
     print(Fore.RED + "Cloudflare has blocked the traffic, please try again.")
     driver.quit()
 
     input(Fore.WHITE + 'Press any key to quit.')
     exit()
 
-# %% Export data to desired location
+# %% Set output path
 config = configparser.ConfigParser()
 config.read('gecko-scan config.ini')
-output_path = config.get('Paths', 'output_path')
+if config.get('Paths', 'output_path_categories') != "":
+    output_path = config.get('Paths', 'output_path_categories')
+else:
+    output_path = script_path + "\\categories-daily"
 
+# %% Export data to desired location
 current_datetime = datetime.datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -230,8 +246,8 @@ for category, dataframe in data_dictionary.items():
     output_name = category + '-' + formatted_datetime + ".csv"
     dataframe.to_csv(output_path + "\\" + output_name)
 
-print("")
+# %% Notice User
 print(Fore.WHITE + "Data has been saved to desired location.")
-print(Fore.WHITE + "Quitting automatically after 5 seconds.")
+print(Fore.WHITE + "Quitting automatically after a minute.")
 
-time.sleep(5)
+time.sleep(60)
