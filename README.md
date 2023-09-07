@@ -8,7 +8,7 @@ First, make sure to install **Git** and **Python** on your computer, see the lin
 
 Second, clone this repository using **Git Bash** using the line below, or simply download it as a **.zip** file and extract it.
 ```
-git@github.com:chengmarc/gecko-scan.git
+git clone git@github.com:chengmarc/gecko-scan.git
 ```
 
 Finally, you would also need to install all the dependencies using either **pip** or **conda**. 
