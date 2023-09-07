@@ -14,10 +14,8 @@ try:
     init()
     print(Fore.GREEN + "All libraries imported.")
 
-except:
-    print("Dependencies missing, please use pip/conda to install all dependencies.")
-    print("Standard libraries:      re, io, os, time, requests, configparser")
-    print("Core libraries:          pandas")
+except ImportError as e:
+    print(f"The module '{e.name}' is not found, please install it using either pip or conda.")
     input('Press any key to quit.')
     exit()
     

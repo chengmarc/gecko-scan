@@ -13,15 +13,12 @@ try:
     from bs4 import BeautifulSoup as bs
     from selenium import webdriver
     from selenium.webdriver.firefox.options import Options
-    from selenium.webdriver.firefox.service import Service
     from colorama import init, Fore
     init()
     print(Fore.GREEN + "All libraries imported.")
 
-except:
-    print("Dependencies missing, please use pip/conda to install all dependencies.")
-    print("Standard libraries:      os, time, datetime, configparser")
-    print("Core libraries:          pandas, bs4, selenium, colorama")
+except ImportError as e:
+    print(f"The module '{e.name}' is not found, please install it using either pip or conda.")
     input('Press any key to quit.')
     exit()
     
@@ -31,10 +28,10 @@ os.chdir(script_path)
 # %% Initialize web driver
 options = Options()
 options.add_argument("-headless")
-service = Service(script_path + "\geckodriver.exe")
+driver_path = script_path + "\geckodriver.exe"
 
 try:
-    driver = webdriver.Firefox(service=service, options=options)
+    driver = webdriver.Firefox(executable_path=driver_path, options=options)
     print(Fore.GREEN + "Web driver initialized.")
 
 except:
