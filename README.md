@@ -13,7 +13,7 @@ pip install pandas bs4 requests selenium colorama
 conda install pandas bs4 requests selenium colorama
 ```
 
-Now you are all set, simply double click **gecko-scan execute-all.bat** and the program will run automatically.
+Now you are all set, simply double click **gecko-scan-all-crypto.py** and **gecko-scan-categories.py**, data will be extracted automatically.
 
 # For further use
 For consistent data, **gecko-scan-all-crypto.py** and **gecko-scan-categories.py** are recommended to be executed daily or weekly. In contrast, **gecko-scan-database.py** is for one-time execution, execute it accordingly to your need.
