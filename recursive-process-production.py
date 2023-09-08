@@ -4,7 +4,7 @@
 @github: https://github.com/chengmarc
 
 """
-import os, requests
+import os, time, requests
 
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
@@ -25,23 +25,37 @@ def process_urls(list_200, list_429):
     elif status_code == 404:            # If status code is 404, simply remove from list_429
         list_429.pop(0)
         print("Discarded", url)
-    elif status_code == 429:            # If status code is 429, do nothing and proceed to the next URL
+    elif status_code == 429:            # If status code is 429, wait 10 seconds and try again
+        time.wait(10)
         print("Skipped", url)
+        pass
     
     return process_urls(list_200, list_429)
 
-# %% Main Execution
-list_200 = []
-list_429 = []     
-for i in range(32000):       
-    url = "https://www.coingecko.com/price_charts/export/" + str(i+1) + "/usd.csv"
-    list_429.append(url)
+# %% Execution by batch to prevent stackoverflow
 
-final_200, final_429 = process_urls(list_200, list_429)
+def list_429_per_batch(i:int, j:int) -> list:
+    list_429 = []
+    for i in range(i, j):       
+        url = "https://www.coingecko.com/price_charts/export/" + str(i+1) + "/usd.csv"
+        list_429.append(url)
+    return list_429
+
+batch_size = 100
+batch_number = 1
+
+final_list_200 = []
+for batch_index in range(batch_number):
+    start = batch_index * batch_size
+    end = (batch_index + 1) * batch_size
+    list_200 = []
+    list_429 = list_429_per_batch(start, end)
+    list_200, list_429 = process_urls(list_200, list_429)
+    final_list_200.extend(list_200)
 
 # %% Output to .txt file
 filename = script_path + "\\recursive-process-output.txt"
 file = open(filename,'w')
-for url in final_200:
+for url in final_list_200:
 	file.write(url + "\n")
 file.close()
