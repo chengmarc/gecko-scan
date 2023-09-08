@@ -6,7 +6,7 @@
 """
 try:
     # Import standard libraries
-    import os, time, datetime, configparser
+    import os, time, datetime, configparser, warnings
     
     # Import core libraries
     import pandas as pd
@@ -29,6 +29,7 @@ os.chdir(script_path)
 options = Options()
 options.add_argument("-headless")
 driver_path = script_path + "\geckodriver.exe"
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 try:
     driver = webdriver.Firefox(executable_path=driver_path, options=options)

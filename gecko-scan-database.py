@@ -6,10 +6,10 @@
 """
 try:
     # Import standard libraries
-    import pandas as pd
+    import re, io, os, time, requests, configparser
     
     # Import core libraries
-    import re, io, os, time, requests, configparser
+    import pandas as pd
     from colorama import init, Fore
     init()
     print(Fore.GREEN + "All libraries imported.")
@@ -23,6 +23,7 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
 # %% Functions for .csv download
+  
 def get_filename(url:str) -> str:
     response = requests.get(url, stream=True)    
     if response.status_code == 200 and response.headers.get("Content-Disposition"):
@@ -67,13 +68,11 @@ else:
     output_path = script_path + "\\database"
 
 # %% Main Execution
-base_url = 'https://www.coingecko.com'
-
-for i in range(31650):
-    sub_url = "/price_charts/export/" + str(i+1) + "/usd.csv"
-    output_name = get_filename(base_url + sub_url)
+for i in range(10):
+    url = "https://www.coingecko.com/price_charts/export/" + str(i+1) + "/usd.csv"
+    output_name = get_filename(url)
     if output_name is not None:
-        download_csv(base_url + sub_url, output_path, output_name)   
+        download_csv(url, output_path, output_name)   
         
 print_ready()
 

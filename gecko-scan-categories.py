@@ -6,7 +6,7 @@
 """
 try:
     # Import standard libraries
-    import os, time, datetime, configparser
+    import os, time, datetime, configparser, warnings
     from urllib.parse import urlparse
     
     # Import core libraries
@@ -30,6 +30,7 @@ os.chdir(script_path)
 options = Options()
 options.add_argument("-headless")
 driver_path = script_path + "\geckodriver.exe"
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 try:
     driver = webdriver.Firefox(executable_path=driver_path, options=options)
@@ -199,7 +200,7 @@ def print_ready():
 data_dictionary, reset_threshold = {}, 0
 
 try:
-    for url in categories_url[:3]:
+    for url in categories_url:
         category = get_name(url)
         num = get_num_of_pages(driver, url)
         pages = get_page_list(num, url)
