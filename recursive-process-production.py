@@ -22,18 +22,18 @@ def process_urls(list_200, list_429):
         list_200.append(url)
         list_429.pop(0)
         print("Appended", url)
+        time.sleep(1)
     elif status_code == 404:            # If status code is 404, simply remove from list_429
         list_429.pop(0)
         print("Discarded", url)
-    elif status_code == 429:            # If status code is 429, wait 10 seconds and try again
-        time.wait(10)
+        time.sleep(1)
+    elif status_code == 429:            # If status code is 429, do nothing
         print("Skipped", url)
-        pass
+        time.sleep(15)
     
     return process_urls(list_200, list_429)
 
 # %% Execution by batch to prevent stackoverflow
-
 def list_429_per_batch(i:int, j:int) -> list:
     list_429 = []
     for i in range(i, j):       
@@ -41,11 +41,10 @@ def list_429_per_batch(i:int, j:int) -> list:
         list_429.append(url)
     return list_429
 
-batch_size = 100
-batch_number = 1
+batch_size = 1000
 
 final_list_200 = []
-for batch_index in range(batch_number):
+for batch_index in range(4, 10):
     start = batch_index * batch_size
     end = (batch_index + 1) * batch_size
     list_200 = []
