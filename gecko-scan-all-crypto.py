@@ -12,7 +12,8 @@ try:
     import pandas as pd
     from bs4 import BeautifulSoup as bs
     from selenium import webdriver
-    from selenium.webdriver.firefox.options import Options
+    from selenium.webdriver.firefox.options import Options as FirefoxOptions
+    from selenium.webdriver.chrome.options import Options as ChromeOptions
     from colorama import init, Fore
     init()
     print(Fore.GREEN + "All libraries imported.")
@@ -26,19 +27,41 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
 # %% Initialize web driver
-options = Options()
-options.add_argument("-headless")
-driver_path = script_path + "\geckodriver.exe"
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
-try:
+def initialize_firefox():
+    #mozilla/geckodriver 0.33.0
+    options = FirefoxOptions()
+    options.add_argument("-headless")
+    driver_path = script_path + "\geckodriver.exe"
     driver = webdriver.Firefox(executable_path=driver_path, options=options)
-    print(Fore.GREEN + "Web driver initialized.")
+    return driver
 
+def initialize_chrome():
+    #ChromeDriver 114.0.5735.90
+    options = ChromeOptions()
+    options.add_argument("--headless")
+    driver_path = script_path + "\chromedriver.exe"
+    driver = webdriver.Chrome(executable_path=driver_path, options=options)
+    return driver
+    
+try:
+    driver = initialize_firefox()
+    print(Fore.GREEN + "Mozilla driver initialized.")
 except:
-    print(Fore.RED + "Firefox Browser missing, please install Firefox Browser.")
-    input('Press any key to quit.')
-    exit()
+    print(Fore.YELLOW + "Firefox not detected, attempt to proceed with Chrome...")
+    
+    try:
+        driver = initialize_chrome()
+        print(Fore.GREEN + "Chrome driver initialized.")
+    except:
+        print(Fore.YELLOW + "Chrome not detected, aborting execution...")
+        print("")
+        print(Fore.YELLOW + "If you already have Chrome installed, but still see this message,",
+                            "please check \"troubleshooting\" section on https://github.com/chengmarc/gecko-scan.")  
+        print("")
+        input('Press any key to quit.')
+        exit()
 
 # %% Getting the number of pages and the urls of all pages
 base_url = "https://www.coingecko.com/"
