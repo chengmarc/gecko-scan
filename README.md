@@ -13,14 +13,14 @@ pip install pandas bs4 requests selenium colorama
 conda install pandas bs4 requests selenium colorama
 ```
 
-Now you are all set, simply double click **gecko-scan-all-crypto.py** and **gecko-scan-categories.py**, data will be extracted automatically.
+Now you are all set, simply double click **gecko_scan_all_crypto.py** and **gecko_scan_categories.py**, data will be extracted automatically.
 
 # For further use
-For consistent data, **gecko-scan-all-crypto.py** and **gecko-scan-categories.py** are recommended to be executed daily or weekly. In contrast, **gecko-scan-database.py** is for one-time execution, execute it accordingly to your need.
+For consistent data, **gecko_scan_all_crypto.py** and **gecko_scan_categories.py** are recommended to be executed daily or weekly. In contrast, **gecko_scan_database.py** is for one-time execution, execute it accordingly to your need.
 
-- **gecko-scan-all-crypto.py** is an **.html** crawler, it extracts all cryptocurrencies data without splitting them into categories.
-- **gecko-scan-categories.py** is an **.html** crawler, it extracts cryptocurrencies data per category.
-- **gecko-scan-database.py** is a **.csv** download tool, it directly download from CoinGecko's database and save it locally.
+- **gecko_scan_all_crypto.py** is an **.html** crawler, it extracts all cryptocurrencies data without splitting them into categories.
+- **gecko_scan_categories.py** is an **.html** crawler, it extracts cryptocurrencies data per category.
+- **gecko_scan_database.py** is a **.csv** download tool, it directly download from CoinGecko's database and save it locally.
 
 # Troubleshooting
 ```
