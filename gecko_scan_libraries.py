@@ -31,7 +31,7 @@ def initialize_firefox():
     #mozilla/geckodriver 0.33.0
     options = FirefoxOptions()
     options.add_argument("-headless")
-    driver_path = script_path + "\geckodriver.exe"
+    driver_path = script_path + "\webdrivers\geckodriver.exe"
     driver = webdriver.Firefox(executable_path=driver_path, options=options)
     return driver
 
@@ -39,7 +39,7 @@ def initialize_chrome():
     #ChromeDriver 114.0.5735.90
     options = ChromeOptions()
     options.add_argument("--headless")
-    driver_path = script_path + "\chromedriver.exe"
+    driver_path = script_path + "\webdrivers\chromedriver.exe"
     driver = webdriver.Chrome(executable_path=driver_path, options=options)
     return driver
 
