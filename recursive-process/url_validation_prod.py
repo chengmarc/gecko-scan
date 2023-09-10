@@ -22,14 +22,14 @@ def process_urls(list_200, list_429):
         list_200.append(url)
         list_429.pop(0)
         print("Appended", url)
-        time.sleep(1)
+        time.sleep(0.5)
     elif status_code == 404:            # If status code is 404, simply remove from list_429
         list_429.pop(0)
         print("Discarded", url)
-        time.sleep(1)
+        time.sleep(0.5)
     elif status_code == 429:            # If status code is 429, do nothing
         print("Skipped", url)
-        time.sleep(15)
+        time.sleep(20)
     
     return process_urls(list_200, list_429)
 
@@ -41,10 +41,22 @@ def list_429_per_batch(i:int, j:int) -> list:
         list_429.append(url)
     return list_429
 
+""" 
+##### Warning #####
+
+Currently there are about 32000 urls needs to be validated.
+Recursive alogarithm will send about 50 requests per minute.
+Validate all 32000 urls will take around 10 hours. 
+
+I have already run this alogarithm and saved a list of validated urls in "gecko_scan_validated_urls.txt".
+This list should be more than enough.
+Do not run this alogarithm unless you have fully understand every line of code.
+"""
+
 batch_size = 1000
 
 final_list_200 = []
-for batch_index in range(4, 10):
+for batch_index in range(0, 32):
     start = batch_index * batch_size
     end = (batch_index + 1) * batch_size
     list_200 = []
@@ -53,8 +65,13 @@ for batch_index in range(4, 10):
     final_list_200.extend(list_200)
 
 # %% Output to .txt file
-filename = script_path + "\\recursive-process-output.txt"
+filename = script_path + "\\url_validation_output.txt"
 file = open(filename,'w')
 for url in final_list_200:
 	file.write(url + "\n")
 file.close()
+
+# %% Notice User
+print(f"{len(final_list_200)} URLs are validated")
+print("Quitting automatically after a minute.")
+time.sleep(60)
