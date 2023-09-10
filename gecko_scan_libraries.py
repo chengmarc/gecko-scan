@@ -4,7 +4,7 @@
 @github: https://github.com/chengmarc
 
 """
-import os, time
+import re, io, os, time, datetime, requests
 from urllib.parse import urlparse
 
 script_path = os.path.dirname(os.path.realpath(__file__))
@@ -28,7 +28,12 @@ except ImportError as e:
 # %% Functions for intializing webdrivers
 
 def initialize_firefox():
-    #mozilla/geckodriver 0.33.0
+    """
+    The function initializes a webdriver and returns a selenium webdriver object.
+    
+    Current webdriver version:
+    mozilla/geckodriver 0.33.0    
+    """
     options = FirefoxOptions()
     options.add_argument("-headless")
     driver_path = script_path + "\webdrivers\geckodriver.exe"
@@ -36,7 +41,12 @@ def initialize_firefox():
     return driver
 
 def initialize_chrome():
-    #ChromeDriver 114.0.5735.90
+    """
+    The function initializes a webdriver and returns a selenium webdriver object 
+    
+    Current webdriver version:
+    ChromeDriver 114.0.5735.90
+    """
     options = ChromeOptions()
     options.add_argument("--headless")
     driver_path = script_path + "\webdrivers\chromedriver.exe"
@@ -47,6 +57,8 @@ def initialize_chrome():
 
 def get_name(category_url:str) -> str:
     """
+    The function takes a category url and returns the last segement of the url.
+    
     Precondition:   category_url is the url of a specific crypto category 
     Return:         a string that is the base name of web url
 
@@ -61,6 +73,8 @@ def get_name(category_url:str) -> str:
 
 def get_num_of_pages(driver, category_url:str) -> int:
     """
+    The functions takes a category and uses a webdriver to return the number of pages in this category.
+    
     Precondition:   driver is a selenium web driver
                     category_url is the url of a specific crypto category      
     Return:         an integer that is the number of pages in this category
@@ -77,6 +91,8 @@ def get_num_of_pages(driver, category_url:str) -> int:
 
 def get_page_list(num, category_url:str) -> list[str]:
     """
+    The fucntion takes a category url and the number of pages to return a list of urls in this category.
+    
     Precondition:   num is an integer that represent the number of pages
                     category_url is the url of a specific crypto category
     Return:         a list of strings that contains the urls of all the pages in this category
@@ -95,6 +111,8 @@ def get_page_list(num, category_url:str) -> list[str]:
 
 def extract_page(soup) -> pd.DataFrame:
     """
+    The function takes a BeautifulSoup soup object and returns a pandas dataframe.
+    
     Precondition:   soup is a BeautifulSoup object parsed from a specific page html
     Return:         a pandas dataframe that contains the market data of the given page
 
@@ -126,6 +144,8 @@ def extract_page(soup) -> pd.DataFrame:
 
 def extract_dataframe(driver, url_lst:list[str]) -> pd.DataFrame:
     """
+    The function takes a list of urls and returns a concatenated pandas dataframe.
+    
     Precondition:   driver is a selenium web driver
                     url_list is a list of strings that contains the urls of all the pages in a category                  
     Return:         a pandas dataframe that contains all the market data of this category
@@ -152,6 +172,8 @@ def extract_dataframe(driver, url_lst:list[str]) -> pd.DataFrame:
 
 def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
+    The function takes a pandas dataframe and removes the currency symbols and empty spaces.
+    
     Precondition:   df is a pandas dataframe that contains market data
     Return:         a pandas dataframe where the cells contains no $ symbol, and no leading or trailing blanks
 
@@ -168,6 +190,69 @@ def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df['MarketCap'] = df['MarketCap'].str[1:]
     
     return df
+
+# %% Functions for database and recursive process
+
+def get_filename(response) -> str:
+    """
+    This function takes an reponse object and returns the file name contained in it.
+    
+    Precondition:   response is an response object obtained by requests.get(url)
+    Return:         a string representing the file name
+    
+    #Example
+    input:  a response object obatined by requests.get("https://www.coingecko.com/price_charts/export/N/usd.csv")
+    output: "btc-usd-max.csv"
+    """
+    if response.headers.get("Content-Disposition"):
+        content_disposition = response.headers.get("Content-Disposition")
+        filename_match = re.search(r'filename="(.+)"', content_disposition)
+        filename = filename_match.group(1)
+    else:
+        current_time = datetime.datetime.now().strftime("%H-%M-%S")
+        filename = f"no-name-{current_time}"
+    return filename
+
+def download_csv(response, filepath:str, filename:str):
+    """
+    This function takes an reponse object and downloads the .csv file contained in it.
+    
+    Precondition:   response is an response object obtained by requests.get(url)
+                    the url must be the same as the following format:
+                    https://www.coingecko.com/price_charts/export/N/usd.csv
+                    where N is an positive integer number
+    """
+    s = response.content
+    df = pd.read_csv(io.StringIO(s.decode('utf-8')))
+    df.to_csv(filepath + "//" + filename, encoding='utf-8')
+
+def recursive_download(url_list:list, output_path:str):
+    """
+    This function takes a list of valid urls and download the .csv files contained in the urls.
+    
+    Precondition:   url_list is a list of urls in the following format:
+                    https://www.coingecko.com/price_charts/export/N/usd.csv
+                    where N is an positive integer number
+    """
+    url = url_list[0] 
+    response = requests.get(url, stream=True)
+    response.status_code
+    
+    if response.status_code == 200:
+        url_list.pop(0)
+        output_name = get_filename(response)
+        download_csv(response, output_path, output_name)
+        print(Fore.GREEN, "Downloaded", url)
+        time.sleep(0.5)
+    elif response.status_code == 404:
+        url_list.pop(0)
+        print(Fore.GREEN, "Discarded", url)
+        time.sleep(0.5)
+    elif response.status_code == 429:
+        print(Fore.YELLOW, "Skipped", url)
+        time.sleep(20)
+        
+    return recursive_download(url_list, output_path)
 
 # %% Function for user notice
 
