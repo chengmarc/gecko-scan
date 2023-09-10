@@ -92,5 +92,6 @@ for category, dataframe in data_dictionary.items():
 
 # %% Notice User
 print(Fore.WHITE + "Data has been saved to desired location.")
-print(Fore.WHITE + "Quitting automatically after a minute.")
-time.sleep(60)
+input(Fore.WHITE + 'Press any key to quit.')
+exit()
+

@@ -94,5 +94,5 @@ df_clean.to_csv(output_path + "\\" + output_name)
 
 # %% Notice User
 print(Fore.WHITE + "Data has been saved to desired location.")
-print(Fore.WHITE + "Quitting automatically after a minute.")
-time.sleep(60)
+input(Fore.WHITE + 'Press any key to quit.')
+exit()
