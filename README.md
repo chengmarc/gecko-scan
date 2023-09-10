@@ -3,7 +3,7 @@
 **gecko-scan** is a web crawler that extract data from the famous cryptocurrency website CoinGecko (a site that hosts up-to-date data on cryptocurrencies). **gecko-scan** will help you download all the data into **.csv** format and store it locally, so that you can perform quantitative analysis using your favourite data science tools.
 
 # First time use
-First, make sure to install **Python** on your computer, see the link given below: 
+First, make sure to install **Python 3.10.11** on your computer.
 
 Second, simply download this repository as a **.zip** file and extract it. 
 
