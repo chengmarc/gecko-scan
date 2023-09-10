@@ -5,6 +5,7 @@
 
 """
 import re, io, os, time, datetime, requests
+from sys import exit
 from urllib.parse import urlparse
 
 script_path = os.path.dirname(os.path.realpath(__file__))
@@ -37,7 +38,7 @@ def initialize_firefox():
     options = FirefoxOptions()
     options.add_argument("-headless")
     driver_path = script_path + "\webdrivers\geckodriver.exe"
-    driver = webdriver.Firefox(executable_path=driver_path, options=options)
+    driver = webdriver.Firefox(executable_path=driver_path, service_log_path='NUL', options=options)
     return driver
 
 def initialize_chrome():
@@ -50,7 +51,7 @@ def initialize_chrome():
     options = ChromeOptions()
     options.add_argument("--headless")
     driver_path = script_path + "\webdrivers\chromedriver.exe"
-    driver = webdriver.Chrome(executable_path=driver_path, options=options)
+    driver = webdriver.Chrome(executable_path=driver_path, service_log_path='NUL', options=options)
     return driver
 
 # %% Functions for getting key information in each category
