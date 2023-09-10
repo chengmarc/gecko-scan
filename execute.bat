@@ -1,0 +1,3 @@
+call gecko_scan_all_crypto.py
+call gecko_scan_categories.py
+pause

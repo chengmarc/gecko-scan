@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 @author: chengmarc
-@github: https://github.com/chengmarc
+@github: https://github.com/chen79gmarc
 
 """
-import os, time, datetime, configparser, warnings
-
+import os, time, datetime
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
@@ -13,10 +12,13 @@ import gecko_scan_libraries as gsl
 from colorama import init, Fore
 init()
 
-# %% Initialize web driver
+# %% Initialize web driver (Note: selenium and webdrivers are deprecated, requests is used instead.)
+"""
+import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 try:
+    raise Exception
     driver = gsl.initialize_firefox()
     print(Fore.GREEN + "Mozilla driver initialized.")
 except:
@@ -27,13 +29,13 @@ except:
         print(Fore.GREEN + "Chrome driver initialized.")
     except:
         print(Fore.RED + "Chrome not detected, aborting execution...")
-        gsl.error_chrome()
-
+        gsl.error_browser()
+"""
 # %% Getting the number of pages and the urls of all pages
 try: 
     base_url = "https://www.coingecko.com/"
-    driver.get(base_url)
-    html = driver.page_source
+    response = gsl.requests.get(base_url, headers=gsl.headers)
+    html = response.content
     soup = gsl.bs(html, "html.parser").find_all('li', class_='page-item')
 
     total_pages = int([obj.get_text() for obj in soup][-2])
@@ -43,18 +45,17 @@ try:
     print(Fore.WHITE + "Successfully extracted URLs.")
     
 except:
-    driver.quit()
+    #driver.quit()
     gsl.error_url_timeout()
     
 # %% Main Execution
-print("")
-
 try:
+    print("")
     reset_threshold, df_clean = 0, gsl.pd.DataFrame(columns = ['Symbol', 'Name', 'Price', 'Change1h', 
                                                                'Change24h', 'Change7d', 'Volume24h', 'MarketCap'])
-    for url in pages:
-        driver.get(url)
-        html = driver.page_source
+    for url in pages:        
+        response = gsl.requests.get(url, headers=gsl.headers)
+        html = response.content
         soup = gsl.bs(html, "html.parser")
         soup = soup.find('div', class_='coingecko-table')
         df_page = gsl.extract_page(soup)
@@ -67,32 +68,23 @@ try:
             time.sleep(20)
 
         print(Fore.WHITE, "Extracting information...")
-        time.sleep(1)
+        time.sleep(0.5)
     
     df_clean = gsl.trim_dataframe(df_clean)
-
-    driver.quit()
+    
+    #driver.quit()
     gsl.notice_data_ready()
 
 except:
-    driver.quit()
-    gsl.error_cloudflare()
-    
-# %% Set output path
-config = configparser.ConfigParser()
-config.read('gecko_scan config.ini')
-if config.get('Paths', 'output_path_all_crypto') != "":
-    output_path = config.get('Paths', 'output_path_all_crypto')
-else:
-    output_path = script_path + "\\all-crypto-daily"
+    #driver.quit()
+    gsl.error_data_timeout()
 
 # %% Export data to desired location
 current_datetime = datetime.datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")
+
+output_path = gsl.get_output_path('output_path_all_crypto')
 output_name = "all-crypto-" + formatted_datetime + ".csv"
 df_clean.to_csv(output_path + "\\" + output_name)
 
-# %% Notice User
-print(Fore.WHITE + "Data has been saved to desired location.")
-input(Fore.WHITE + 'Press any key to quit.')
-exit()
+gsl.notice_exit()

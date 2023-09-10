@@ -48,7 +48,7 @@ Currently there are about 32000 urls needs to be validated.
 Recursive alogarithm will send about 50 requests per minute.
 Validate all 32000 urls will take around 10 hours. 
 
-I have already run this alogarithm and saved a list of validated urls in "gecko_scan_validated_urls.txt".
+I have already run this alogarithm and saved a list of validated urls in "url_validation_verified.txt".
 This list should be more than enough.
 Do not run this alogarithm unless you have fully understand every line of code.
 """

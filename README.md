@@ -9,19 +9,18 @@ Second, simply download this repository as a **.zip** file and extract it.
 
 Finally, you would also need to install all the dependencies using either **pip** or **conda**. 
 ```
-pip install pandas bs4 requests selenium colorama
-conda install pandas bs4 requests selenium colorama
+pip install pandas bs4 requests colorama
+conda install pandas bs4 requests colorama
 ```
 
-Now you are all set, simply double click **gecko_scan_all_crypto.py** and **gecko_scan_categories.py**, data will be extracted automatically.
+Now you are all set, simply double click **execute.bat** and data will be extracted automatically.
 
 # For further use
-For consistent data, **gecko_scan_all_crypto.py** and **gecko_scan_categories.py** are recommended to be executed daily or weekly. In contrast, **gecko_scan_database.py** is for one-time execution, execute it accordingly to your need.
+**execute.bat** is a batch file that execute **gecko_scan_all_crypto.py** and **gecko_scan_categories.py**. Normally, you only need to double click this file.
 
-- **gecko_scan_all_crypto.py** is an **.html** crawler, it extracts all cryptocurrencies data without splitting them into categories.
-- **gecko_scan_categories.py** is an **.html** crawler, it extracts cryptocurrencies data per category.
-- **gecko_scan_database.py** is a **.csv** download tool, it directly download from CoinGecko's database and save it locally.
-
+- **gecko_scan_all_crypto.py** is an **.html** crawler, it extracts all cryptocurrencies data without splitting them into categories. This scirpt is recommended to be executed daily or weekly.
+- **gecko_scan_categories.py** is an **.html** crawler, it extracts cryptocurrencies data per category. This scirpt is recommended to be executed daily or weekly.
+- **gecko_scan_database.py** is a **.csv** download script, it directly downloads from CoinGecko's database and saves it locally. Running it will extract about 26000 **.csv** file, which will take around 10 hours. This scirpt is recommended for one-time execution only.
 # Troubleshooting
 ```
 Chrome not detected, aborting execution...
