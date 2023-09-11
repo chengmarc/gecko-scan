@@ -26,7 +26,7 @@ except:
 
 # %% Execution by batch to prevent stackoverflow
 print("")
-batch_size = 1
+batch_size = 1000
 batch_list = []
 for i in range(0, len(url_list), batch_size):
     batch_list.append(url_list[i:i + batch_size])
@@ -34,7 +34,7 @@ for i in range(0, len(url_list), batch_size):
 # %% Main execution and data export
 try:
     output_path, valid = gsl.get_and_check_config("output_path_database")
-    for url_list in batch_list[:1]:
+    for url_list in batch_list:
         gsl.recursive_download(url_list, output_path)
     if valid:
         gsl.notice_save_desired()
