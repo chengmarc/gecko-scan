@@ -10,8 +10,8 @@ Second, simply download this repository as a **.zip** file and extract it.
 
 Finally, you would also need to install all the dependencies using either **pip** or **conda**. 
 ```
-pip install pandas bs4 requests colorama
-conda install pandas bs4 requests colorama
+pip install requests pandas bs4 colorama
+conda install requests pandas bs4 colorama
 ```
 
 Now you are all set, simply double click **execute.bat** and data will be extracted automatically.
@@ -25,11 +25,6 @@ Now you are all set, simply double click **execute.bat** and data will be extrac
 # Troubleshooting
 While **selenium** is more suitable fore dynamic website interactions, **requests** is less resource dependent and more suitable for our purpose. Hence, **requests** has been implemented to replace **selenium**. There should be no more browser issues. 
 
-
-```
-Chrome not detected, aborting execution...
-If you already have Chrome installed, but still see this message, please check "troubleshooting" section on https://github.com/chengmarc/gecko-scan.
-```
 <del>Currently, **gecko-scan** has with two webdrivers: Mozilla's **geckodriver.exe** (x64 version 0.33.0) and Chrome's **chromedriver.exe** (x32 version 114.0.5735.90).<del>
 
 <del>- **geckodriver.exe** works with Firefox Browser.<del>
