@@ -26,7 +26,6 @@ try:
     print(Fore.WHITE + "Successfully extracted URLs.")
 
 except:
-    # driver.quit()
     gsl.error_url_timeout()
 
 # %% Extract data

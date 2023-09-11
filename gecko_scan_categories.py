@@ -28,7 +28,6 @@ try:
     print(Fore.WHITE + "Successfully extracted URLs.")
 
 except:
-    # driver.quit()
     gsl.error_url_timeout()
 
 # %% Extract data
@@ -51,11 +50,9 @@ try:
             reset_threshold = 0
             time.sleep(20)
 
-    # driver.quit()
     gsl.notice_data_ready()
 
 except:
-    # driver.quit()
     gsl.error_data_timeout()
 
 # %% Export data
