@@ -5,7 +5,6 @@
 
 """
 import os
-
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
@@ -15,7 +14,7 @@ init()
 
 # %% Load or create list of urls
 try:
-    url_file = open(script_path + "\\recursive-process\\url_validation_verified.txt", "r")
+    url_file = open(gsl.os.path.join(script_path, "recursive-process", "url_validation_verified.txt"), "r")
     url_list = url_file.read()
     url_list = url_list.split("\n")
     url_file.close()
@@ -26,14 +25,14 @@ except:
 
 # %% Execution by batch to prevent stackoverflow
 print("")
-batch_size = 1000
+batch_size = 1
 batch_list = []
 for i in range(0, len(url_list), batch_size):
     batch_list.append(url_list[i:i + batch_size])
 
 # %% Main execution and data export
 try:
-    output_path, valid = gsl.get_and_check_config("output_path_database")
+    output_path, valid = gsl.get_and_check_config("output_path_database", script_path)
     for url_list in batch_list:
         gsl.recursive_download(url_list, output_path)
     if valid:

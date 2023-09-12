@@ -4,8 +4,7 @@
 @github: https://github.com/chengmarc
 
 """
-import os, time
-
+import os
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
@@ -48,7 +47,7 @@ try:
         if reset_threshold > 25:
             gsl.notice_wait_20()
             reset_threshold = 0
-            time.sleep(20)
+            gsl.time.sleep(20)
 
     gsl.notice_data_ready()
 
@@ -57,10 +56,10 @@ except:
 
 # %% Export data
 try:
-    output_path, valid = gsl.get_and_check_config("output_path_categories")
+    output_path, valid = gsl.get_and_check_config("output_path_categories", script_path)
     for category, dataframe in data_dictionary.items():
         output_name = f"{category}-{gsl.get_datetime()}.csv"
-        dataframe.to_csv(output_path + "\\" + output_name)
+        dataframe.to_csv(gsl.os.path.join(output_path, output_name))
     if valid:
         gsl.notice_save_desired()
     else:

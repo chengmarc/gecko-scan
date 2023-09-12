@@ -6,9 +6,7 @@
 """
 import re, io, os, sys, time, datetime, configparser, getpass
 from urllib.parse import urlparse
-
 script_path = os.path.dirname(os.path.realpath(__file__))
-os.chdir(script_path)
 
 try:
     import requests
@@ -221,7 +219,7 @@ def recursive_download(url_list: list, output_path: str):
         url_list.pop(0)
         output_name = get_filename(response, url)
         df = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
-        df.to_csv(output_path + "\\" + output_name, encoding="utf-8")
+        df.to_csv(os.path.join(output_path, output_name), encoding="utf-8")
         print(Fore.GREEN, f"Downloaded {url}")
         time.sleep(0.5)
     elif response.status_code == 404:
@@ -238,7 +236,7 @@ def recursive_download(url_list: list, output_path: str):
 # %% Function for output path and output time
 
 
-def get_and_check_config(selection: str) -> (str, bool):
+def get_and_check_config(selection: str, path:str) -> (str, bool):
     """
     This function checks "gecko_scan config.ini" and returns the path if there is one.
     If the path is empty or is not valid, then it will return the default path.
@@ -247,16 +245,16 @@ def get_and_check_config(selection: str) -> (str, bool):
                     a string that represents the output path
     """
     config = configparser.ConfigParser()
-    config.read("gecko_scan config.ini")
+    config.read(os.path.join(path, "gecko_scan config.ini"))
     config_path = config.get("Paths", selection)
     if os.path.isdir(config_path):
         return config_path, True
     elif selection == "output_path_all_crypto":
-        return script_path + "\\all-crypto-daily", False
+        return os.path.join(path, "all-crypto-daily"), False
     elif selection == "output_path_categories":
-        return script_path + "\\categories-daily", False
+        return os.path.join(path, "categories-daily"), False
     elif selection == "output_path_database":
-        return script_path + "\\database", False
+        return os.path.join(path, "database"), False
 
 
 def get_datetime():

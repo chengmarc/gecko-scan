@@ -4,8 +4,7 @@
 @github: https://github.com/chengmarc
 
 """
-import os, time
-
+import os
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
@@ -42,13 +41,13 @@ try:
         df_page = gsl.extract_page(soup)
         df_clean = gsl.pd.concat([df_clean, df_page], axis=0, ignore_index=True)
         print(Fore.WHITE, "Extracting information...")
-        time.sleep(0.5)
+        gsl.time.sleep(0.5)
 
         reset_threshold += 1
         if reset_threshold > 25:
             gsl.notice_wait_20()
             reset_threshold = 0
-            time.sleep(20)
+            gsl.time.sleep(20)
 
     df_clean = gsl.trim_dataframe(df_clean)
     gsl.notice_data_ready()
@@ -58,9 +57,9 @@ except:
 
 # %% Export data
 try:
-    output_path, valid = gsl.get_and_check_config("output_path_all_crypto")
+    output_path, valid = gsl.get_and_check_config("output_path_all_crypto", script_path)
     output_name = f"all-crypto-{gsl.get_datetime()}.csv"
-    df_clean.to_csv(output_path + "\\" + output_name)
+    df_clean.to_csv(gsl.os.path.join(output_path, output_name))
     if valid:
         gsl.notice_save_desired()
     else:
