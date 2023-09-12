@@ -40,7 +40,7 @@ try:
         soup = soup.find("div", class_="coingecko-table")
         df_page = gsl.extract_page(soup)
         df_clean = gsl.pd.concat([df_clean, df_page], axis=0, ignore_index=True)
-        print(Fore.WHITE, "Extracting information...")
+        print(Fore.WHITE, "- Extracting information...")
         gsl.time.sleep(0.5)
 
         reset_threshold += 1
@@ -50,7 +50,9 @@ try:
             gsl.time.sleep(20)
 
     df_clean = gsl.trim_dataframe(df_clean)
-    gsl.notice_data_ready()
+
+    print("")
+    print(Fore.GREEN + "All data ready.")
 
 except:
     gsl.error_data_timeout()

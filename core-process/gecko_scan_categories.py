@@ -34,14 +34,14 @@ try:
     print("")
     data_dictionary, reset_threshold = {}, 0
 
-    for url in categories_url[:1]:
+    for url in categories_url:
         category = gsl.get_category_name(url)
         num = gsl.get_num_of_pages(gsl.headers, url)
         pages = gsl.get_page_list(num, url)
         data = gsl.extract_dataframe(gsl.headers, pages)
         data = gsl.trim_dataframe(data)
         data_dictionary[category] = data
-        print(Fore.GREEN, f"Successfully extracted data for {category}")
+        print(Fore.WHITE, f"- Successfully extracted data for {category}")
 
         reset_threshold += num
         if reset_threshold > 25:
@@ -49,7 +49,8 @@ try:
             reset_threshold = 0
             gsl.time.sleep(20)
 
-    gsl.notice_data_ready()
+    print("")
+    print(Fore.GREEN + "All data ready.")
 
 except:
     gsl.error_data_timeout()

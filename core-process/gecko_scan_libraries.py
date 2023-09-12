@@ -145,7 +145,7 @@ def extract_dataframe(headers, url_lst: list[str]) -> pd.DataFrame:
         df_page = extract_page(soup)
         df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
 
-        print(Fore.WHITE, "Extracting information...")
+        print(Fore.WHITE, "- Extracting information...")
         time.sleep(0.5)
 
     return df_clean
@@ -220,14 +220,14 @@ def recursive_download(url_list: list, output_path: str):
         output_name = get_filename(response, url)
         df = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
         df.to_csv(os.path.join(output_path, output_name), encoding="utf-8")
-        print(Fore.GREEN, f"Downloaded {url}")
+        print(Fore.WHITE, f"- Downloaded {url}")
         time.sleep(0.5)
     elif response.status_code == 404:
         url_list.pop(0)
-        print(Fore.GREEN, f"Discarded {url}")
+        print(Fore.WHITE, f"- Discarded {url}")
         time.sleep(0.5)
     elif response.status_code == 429:
-        print(Fore.YELLOW, f"Skipped {url}")
+        print(Fore.YELLOW, f"- Skipped {url}")
         time.sleep(20)
 
     return recursive_download(url_list, output_path)
@@ -271,15 +271,6 @@ def get_datetime():
 # %% Function for user notice
 
 
-def notice_data_ready():
-    print(Fore.GREEN + "       _ _       _       _                             _       ")
-    print(Fore.GREEN + "  __ _| | |   __| | __ _| |_ __ _   _ __ ___  __ _  __| |_   _ ")
-    print(Fore.GREEN + " / _` | | |  / _` |/ _` | __/ _` | | '__/ _ \/ _` |/ _` | | | |")
-    print(Fore.GREEN + "| (_| | | | | (_| | (_| | || (_| | | | |  __/ (_| | (_| | |_| |")
-    print(Fore.GREEN + " \__,_|_|_|  \__,_|\__,_|\__\__,_| |_|  \___|\__,_|\__,_|\__, |")
-    print(Fore.GREEN + "                                                         |___/ ")
-
-
 def notice_wait_20():
     print("")
     print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
@@ -287,14 +278,12 @@ def notice_wait_20():
 
 
 def notice_save_desired():
-    print("")
     print(Fore.WHITE + "Successfully loaded output config.")
     print(Fore.WHITE + "Data has been saved to the desired location.")
     print("")
 
 
 def notice_save_default():
-    print("")
     print(Fore.WHITE + "Output config not detected.")
     print(Fore.WHITE + "Data has been saved to the default location.")
     print("")
