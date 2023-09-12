@@ -33,7 +33,7 @@ try:
     reset_threshold, df_clean = 0, gsl.pd.DataFrame(
         columns=["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"])
 
-    for url in pages:
+    for url in pages[:1]:
         response = gsl.requests.get(url, headers=gsl.headers)
         html = response.content
         soup = gsl.bs(html, "html.parser")
@@ -57,7 +57,7 @@ except:
 
 # %% Export data
 try:
-    output_path, valid = gsl.get_and_check_config("output_path_all_crypto", script_path)
+    output_path, valid = gsl.get_and_check_config("output_path_all_crypto", os.path.dirname(script_path))
     output_name = f"all-crypto-{gsl.get_datetime()}.csv"
     df_clean.to_csv(gsl.os.path.join(output_path, output_name))
     if valid:
@@ -68,4 +68,4 @@ try:
 except:
     gsl.error_save_failed()
 
-gsl.notice_exit()
+gsl.sys.exit()

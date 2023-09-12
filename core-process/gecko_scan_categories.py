@@ -34,7 +34,7 @@ try:
     print("")
     data_dictionary, reset_threshold = {}, 0
 
-    for url in categories_url:
+    for url in categories_url[:1]:
         category = gsl.get_category_name(url)
         num = gsl.get_num_of_pages(gsl.headers, url)
         pages = gsl.get_page_list(num, url)
@@ -56,7 +56,7 @@ except:
 
 # %% Export data
 try:
-    output_path, valid = gsl.get_and_check_config("output_path_categories", script_path)
+    output_path, valid = gsl.get_and_check_config("output_path_categories", os.path.dirname(script_path))
     for category, dataframe in data_dictionary.items():
         output_name = f"{category}-{gsl.get_datetime()}.csv"
         dataframe.to_csv(gsl.os.path.join(output_path, output_name))
@@ -68,4 +68,4 @@ try:
 except:
     gsl.error_save_failed()
 
-gsl.notice_exit()
+gsl.sys.exit()

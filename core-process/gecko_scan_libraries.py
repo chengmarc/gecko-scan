@@ -245,7 +245,7 @@ def get_and_check_config(selection: str, path:str) -> (str, bool):
                     a string that represents the output path
     """
     config = configparser.ConfigParser()
-    config.read(os.path.join(path, "gecko_scan config.ini"))
+    config.read(os.path.join(path, "config.ini"))
     config_path = config.get("Paths", selection)
     if os.path.isdir(config_path):
         return config_path, True
@@ -300,28 +300,22 @@ def notice_save_default():
     print("")
 
 
-def notice_exit():
-    print(Fore.WHITE + "Quit automatically in 20 seconds...")
-    time.sleep(20)
-    sys.exit()
-
-
 def error_url_timeout():
     print("")
     print(Fore.RED + "URL extraction timeout, please try again.")
-    getpass.getpass("Press Enter to quit in a few seconds...")
+    getpass.getpass("Press enter to quit...")
     sys.exit()
 
 
 def error_data_timeout():
     print("")
     print(Fore.RED + "Data extraction timeout, please try again.")
-    getpass.getpass("Press Enter to quit in a few seconds...")
+    getpass.getpass("Press enter to quit...")
     sys.exit()
 
 
 def error_save_failed():
     print("")
     print(Fore.RED + "Failed to save extracted data, please troubleshoot.")
-    getpass.getpass("Press Enter to quit in a few seconds...")
+    getpass.getpass("Press enter to quit...")
     sys.exit()
