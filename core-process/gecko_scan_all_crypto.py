@@ -33,7 +33,7 @@ try:
     reset_threshold, df_clean = 0, gsl.pd.DataFrame(
         columns=["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"])
 
-    for url in pages[:1]:
+    for url in pages:
         response = gsl.requests.get(url, headers=gsl.headers)
         html = response.content
         soup = gsl.bs(html, "html.parser")
