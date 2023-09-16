@@ -9,8 +9,6 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
 import gecko_scan_libraries as gsl
-from colorama import init, Fore
-init()
 
 # %% Extract urls
 try:
@@ -24,7 +22,7 @@ try:
         if "categories" in href and "ecosystem" not in href:
             categories_url.append(gsl.base_url + href)
             categories_url = list(dict.fromkeys(categories_url))
-    print(Fore.WHITE + "Successfully extracted URLs.")
+    print(gsl.Fore.WHITE + "Successfully extracted URLs.")
 
 except:
     gsl.error_url_timeout()
@@ -41,7 +39,7 @@ try:
         data = gsl.extract_dataframe(gsl.headers, pages)
         data = gsl.trim_dataframe(data)
         data_dictionary[category] = data
-        print(Fore.WHITE, f"- Successfully extracted data for {category}")
+        print(gsl.Fore.WHITE, f"- Successfully extracted data for {category}")
 
         reset_threshold += num
         if reset_threshold > 25:
@@ -50,7 +48,7 @@ try:
             gsl.time.sleep(20)
 
     print("")
-    print(Fore.GREEN + "All data ready.")
+    print(gsl.Fore.GREEN + "All data ready.")
 
 except:
     gsl.error_data_timeout()

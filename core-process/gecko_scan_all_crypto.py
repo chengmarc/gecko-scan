@@ -9,8 +9,6 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
 import gecko_scan_libraries as gsl
-from colorama import init, Fore
-init()
 
 # %% Extract urls
 try:
@@ -22,7 +20,7 @@ try:
     pages = [gsl.base_url]
     for i in range(2, total_pages + 1):
         pages.append(f"{gsl.base_url}?page={str(i)}")
-    print(Fore.WHITE + "Successfully extracted URLs.")
+    print(gsl.Fore.WHITE + "Successfully extracted URLs.")
 
 except:
     gsl.error_url_timeout()
@@ -40,7 +38,7 @@ try:
         soup = soup.find("div", class_="coingecko-table")
         df_page = gsl.extract_page(soup)
         df_clean = gsl.pd.concat([df_clean, df_page], axis=0, ignore_index=True)
-        print(Fore.WHITE, "- Extracting information...")
+        print(gsl.Fore.WHITE, "- Extracting information...")
         gsl.time.sleep(0.5)
 
         reset_threshold += 1
@@ -52,7 +50,7 @@ try:
     df_clean = gsl.trim_dataframe(df_clean)
 
     print("")
-    print(Fore.GREEN + "All data ready.")
+    print(gsl.Fore.GREEN + "All data ready.")
 
 except:
     gsl.error_data_timeout()
