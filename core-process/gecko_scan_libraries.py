@@ -21,6 +21,36 @@ except ImportError as e:
     getpass.getpass("Press Enter to quit in a few seconds...")
     sys.exit()
 
+
+# %% Function overview
+"""
+The graph below is an overview of the call structure of the functions.
+│
+├───get_category_name()             # get the name of a category (sector)
+├───get_num_of_pages()              # get the number of pages of a category
+├───get_page_list()                 # get the list of urls of a category
+│   
+├───extract_dataframe()             # extract dataframe from a list of urls
+│   │
+│   └───extract_page()              # extract data from a given page
+│
+├───trim_dataframe()                # clean a given dataframe
+│
+├───recursive_download()            # download database
+│   │
+│   └───get_filename()              # get the file name of a given page
+│
+├───get_and_check_config()          # set output path
+├───get_datetime()                  # get current datetime
+│
+├───notice_wait_20()                # user notice
+├───notice_save_desired()           # user notice
+├───notice_save_default()           # user notice
+├───error_url_timeout()             # user notice
+├───error_data_timeout()            # user notice
+└───error_save_failed()             # user notice
+"""
+
 # %% Fake headers to bypass CloudFlare
 base_url = "https://www.coingecko.com/"
 headers = {"User-Agent": "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
