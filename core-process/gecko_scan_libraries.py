@@ -75,7 +75,7 @@ def get_category_name(category_url: str) -> str:
     return filename
 
 
-def get_num_of_pages(headers, category_url: str) -> int:
+def get_num_of_pages(headers: dict, category_url: str) -> int:
     """
     The function takes the given headers and sends a request to the category url,
     and returns the number of pages in this category.
@@ -94,7 +94,7 @@ def get_num_of_pages(headers, category_url: str) -> int:
     return num
 
 
-def get_page_list(num, category_url: str) -> list[str]:
+def get_page_list(num: int, category_url: str) -> list[str]:
     """
     The fucntion takes the category url and the number of pages to return a list of urls in this category.
 
@@ -104,6 +104,7 @@ def get_page_list(num, category_url: str) -> list[str]:
 
     # Example
     input:  2, "www.coingecko.com/en/categories/smart-contract-platform"
+
     output: ["www.coingecko.com/en/categories/smart-contract-platform",
              "www.coingecko.com/en/categories/smart-contract-platform?page=2"]
     """
@@ -151,7 +152,7 @@ def extract_page(soup) -> pd.DataFrame:
     return df
 
 
-def extract_dataframe(headers, url_lst: list[str]) -> pd.DataFrame:
+def extract_dataframe(headers: dict, url_lst: list[str]) -> pd.DataFrame:
     """
     The function takes given headers and sends a request to the list of urls,
     and returns a concatenated pandas dataframe.
@@ -162,6 +163,7 @@ def extract_dataframe(headers, url_lst: list[str]) -> pd.DataFrame:
     # Example
     input:  headers,  ["www.coingecko.com/en/categories/smart-contract-platform",
                        "www.coingecko.com/en/categories/smart-contract-platform?page=2"]
+
     output: a pandas dataframe with 150 rows of market data (100 rows on the first page, 50 rows on the second)
     """
     df_clean = pd.DataFrame(
@@ -206,7 +208,7 @@ def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 # %% Functions for database and recursive process
 
 
-def get_filename(response, url: str) -> str:
+def get_filename(response: requests.Response, url: str) -> str:
     """
     This function takes an response object and returns the file name contained in it.
 
@@ -266,9 +268,9 @@ def recursive_download(url_list: list, output_path: str):
 # %% Function for output path and output time
 
 
-def get_and_check_config(selection: str, path:str) -> (str, bool):
+def get_and_check_config(selection: str, path: str) -> (str, bool):
     """
-    This function checks "gecko_scan config.ini" and returns the path if there is one.
+    This function checks "config.ini" and returns the path if there is one.
     If the path is empty or is not valid, then it will return the default path.
 
     Return:         a boolean that represents the validity
@@ -287,9 +289,9 @@ def get_and_check_config(selection: str, path:str) -> (str, bool):
         return os.path.join(path, "database"), False
 
 
-def get_datetime():
+def get_datetime() -> str:
     """
-    This function returns a string that represents the current time.
+    This function returns a string that represents the current datetime.
     
     Return:         a string of the format: %Y-%m-%d_%H-%M-%S
     """
@@ -301,39 +303,39 @@ def get_datetime():
 # %% Function for user notice
 
 
-def notice_wait_20():
+def notice_wait_20() -> None:
     print("")
     print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
     print("")
 
 
-def notice_save_desired():
+def notice_save_desired() -> None:
     print(Fore.WHITE + "Successfully loaded output config.")
     print(Fore.WHITE + "Data has been saved to the desired location.")
     print("")
 
 
-def notice_save_default():
+def notice_save_default() -> None:
     print(Fore.WHITE + "Output config not detected.")
     print(Fore.WHITE + "Data has been saved to the default location.")
     print("")
 
 
-def error_url_timeout():
+def error_url_timeout() -> None:
     print("")
     print(Fore.RED + "URL extraction timeout, please try again.")
     getpass.getpass("Press enter to quit...")
     sys.exit()
 
 
-def error_data_timeout():
+def error_data_timeout() -> None:
     print("")
     print(Fore.RED + "Data extraction timeout, please try again.")
     getpass.getpass("Press enter to quit...")
     sys.exit()
 
 
-def error_save_failed():
+def error_save_failed() -> None:
     print("")
     print(Fore.RED + "Failed to save extracted data, please troubleshoot.")
     getpass.getpass("Press enter to quit...")
