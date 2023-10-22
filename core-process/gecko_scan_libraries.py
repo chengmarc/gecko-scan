@@ -6,9 +6,9 @@
 """
 import re, io, os, sys, time, datetime, configparser, getpass
 from urllib.parse import urlparse
-script_path = os.path.dirname(os.path.realpath(__file__))
 
 try:
+    import tkinter
     import requests
     import pandas as pd
     from bs4 import BeautifulSoup as bs
@@ -40,7 +40,10 @@ The graph below is an overview of the call structure of the functions.
 │   │
 │   └───get_filename()              # get the file name of a given page
 │
-├───get_and_check_config()          # set output path
+├───config_create()                 # detect config and create one if not exist
+├───config_read()                   # read from config
+├───config_save()                   # save to config
+│
 ├───get_datetime()                  # get current datetime
 │
 ├───notice_wait_20()                # user notice
@@ -53,7 +56,7 @@ The graph below is an overview of the call structure of the functions.
 
 # %% Fake headers to bypass CloudFlare
 base_url = "https://www.coingecko.com/"
-headers = {"User-Agent": "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 # %% Functions for getting key information in each category
 
@@ -94,7 +97,7 @@ def get_num_of_pages(headers: dict, category_url: str) -> int:
     return num
 
 
-def get_page_list(num: int, category_url: str) -> list[str]:
+def get_page_list(num: int, category_url: str) -> list:
     """
     The fucntion takes the category url and the number of pages to return a list of urls in this category.
 
@@ -152,7 +155,7 @@ def extract_page(soup) -> pd.DataFrame:
     return df
 
 
-def extract_dataframe(headers: dict, url_lst: list[str]) -> pd.DataFrame:
+def extract_dataframe(headers: dict, url_lst: list) -> "pd.DataFrame":
     """
     The function takes given headers and sends a request to the list of urls,
     and returns a concatenated pandas dataframe.
@@ -183,7 +186,7 @@ def extract_dataframe(headers: dict, url_lst: list[str]) -> pd.DataFrame:
     return df_clean
 
 
-def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+def trim_dataframe(df: "pd.DataFrame") -> "pd.DataFrame":
     """
     The function takes a pandas dataframe and removes currency symbols and empty spaces.
 
@@ -244,7 +247,7 @@ def recursive_download(url_list: list, output_path: str):
         return
 
     url = url_list[0]
-    response = requests.get(url, stream=True)
+    response = requests.get(url, headers=headers, stream=True)
     response.status_code
 
     if response.status_code == 200:
@@ -258,6 +261,9 @@ def recursive_download(url_list: list, output_path: str):
         url_list.pop(0)
         print(Fore.WHITE, f"- Discarded {url}")
         time.sleep(0.5)
+    elif response.status_code == 403:
+        print(Fore.YELLOW, f"- Skipped {url}")
+        time.sleep(0.5)
     elif response.status_code == 429:
         print(Fore.YELLOW, f"- Skipped {url}")
         time.sleep(20)
@@ -268,25 +274,53 @@ def recursive_download(url_list: list, output_path: str):
 # %% Function for output path and output time
 
 
-def get_and_check_config(selection: str, path: str) -> (str, bool):
+def config_create() -> None:
     """
-    This function checks "config.ini" and returns the path if there is one.
-    If the path is empty or is not valid, then it will return the default path.
+    This function detects if the config file exist.
+    If not, it will create the config file with default save locations.
+    """
+    config_file = r"C:\Users\Public\config.ini"
+    if not os.path.exists(config_file):
+        content = ("[Paths]\n"
+                   r"output_path_all_crypto=C:\Users\Public\Documents" + "\n"
+                   r"output_path_categories=C:\Users\Public\Documents" + "\n"
+                   r"output_path_database=C:\Users\Public\Documents" + "\n")
+        with open(config_file, "w") as f:
+            f.write(content)
+            f.close()
 
-    Return:         a boolean that represents the validity
-                    a string that represents the output path
+
+def config_read(selection: str) -> (str, bool):
     """
+    Given a selection, this function will return the corresponding path.
+
+    Return:         a tuple of str and boolean
+                    the string represents the path
+                    the boolean represents the validity of the path
+    """
+    config_file = r"C:\Users\Public\config.ini"
     config = configparser.ConfigParser()
-    config.read(os.path.join(path, "config.ini"))
+    config.read(config_file)
     config_path = config.get("Paths", selection)
+    
     if os.path.isdir(config_path):
         return config_path, True
-    elif selection == "output_path_all_crypto":
-        return os.path.join(path, "all-crypto-daily"), False
-    elif selection == "output_path_categories":
-        return os.path.join(path, "categories-daily"), False
-    elif selection == "output_path_database":
-        return os.path.join(path, "database"), False
+    else:
+        return config_path, False
+
+
+def config_save(path1, path2, path3) -> None:
+    """
+    Given three strings, this function will save the strings to the config file.
+    """
+    config_file = r"C:\Users\Public\config.ini"
+    content = ("[Paths]\n"
+               f"output_path_all_crypto={path1}\n"
+               f"output_path_categories={path2}\n"
+               f"output_path_database={path3}\n")
+    with open(config_file, "w") as f:
+        f.write(content)
+        f.close()
 
 
 def get_datetime() -> str:
@@ -303,21 +337,24 @@ def get_datetime() -> str:
 # %% Function for user notice
 
 
+def notice_start(name: str) -> None:
+    length = len(name) + 6*2
+    print("")
+    print(Fore.WHITE + length*"#")
+    print(Fore.WHITE + f"##### {name} #####")
+    print(Fore.WHITE + length*"#")
+    print("")
+
+
 def notice_wait_20() -> None:
     print("")
     print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
     print("")
 
 
-def notice_save_desired() -> None:
+def notice_save_success() -> None:
     print(Fore.WHITE + "Successfully loaded output config.")
     print(Fore.WHITE + "Data has been saved to the desired location.")
-    print("")
-
-
-def notice_save_default() -> None:
-    print(Fore.WHITE + "Output config not detected.")
-    print(Fore.WHITE + "Data has been saved to the default location.")
     print("")
 
 
@@ -337,6 +374,6 @@ def error_data_timeout() -> None:
 
 def error_save_failed() -> None:
     print("")
-    print(Fore.RED + "Failed to save extracted data, please troubleshoot.")
+    print(Fore.RED + "Failed to save extracted data, please check your config.")
     getpass.getpass("Press enter to quit...")
     sys.exit()

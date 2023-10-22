@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gsl-dependencies',
-    version='1.0',
+    version='1.1',
     packages=find_packages(),
-    install_requires=['requests', 'pandas', 'bs4', 'colorama']
+    install_requires=['tk', 'requests', 'pandas', 'bs4', 'colorama']
 )
