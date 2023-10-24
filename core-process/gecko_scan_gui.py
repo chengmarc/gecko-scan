@@ -8,11 +8,11 @@ import os
 script_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_path)
 
-from gecko_scan_libraries import config_create, config_read, config_save
+from gecko_scan_libraries import sys
 from gecko_scan_libraries import tkinter as tk
-from gecko_scan_all_crypto import main as main1
-from gecko_scan_categories import main as main2
-from gecko_scan_database import main as main3
+from gecko_scan_libraries import threading as td
+from gecko_scan_libraries import config_create, config_read, config_save
+from gecko_scan_functions import main1, main2, main3
 
 config_create()
 
@@ -22,23 +22,25 @@ def execute():
     if accept2.get() == "Accepted": main2(text2.get())
     if accept3.get() == "Accepted": main3(text3.get())
 
-from sys import exit
+def thread_execute():
+    thread = td.Thread(target=execute) 
+    thread.start()
 
 # %% Initialize Window
 root = tk.Tk()
-root.title("Gecko Scan v1.1")
-root.geometry("410x300")
+root.title("GeckoScan v1.1")
+root.geometry("480x320")
 root.iconbitmap("gecko_scan_icon.ico")
 root.resizable(width=False, height=False)
 
 window = tk.Frame(root)
-window.pack()
+window.pack(expand=True)
 
 # %% Creating Main Frames
 frame1 = tk.LabelFrame(window, text="Extraction Options")
 frame2 = tk.LabelFrame(window, text="Save Locations")
-button1 = tk.Button(window, text="Execute", command=execute)
-button2 = tk.Button(window, text="Exit", command=exit)
+button1 = tk.Button(window, text="Execute", command=thread_execute)
+button2 = tk.Button(window, text="Exit", command=sys.exit)
 
 frame1.grid(row=1, column=0, sticky="nswe", padx=20, pady=10, columnspan=2)
 frame2.grid(row=2, column=0, sticky="nswe", padx=20, pady=10, columnspan=2)
