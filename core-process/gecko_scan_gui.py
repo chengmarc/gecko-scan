@@ -28,7 +28,7 @@ def thread_execute():
 
 # %% Initialize Window
 root = tk.Tk()
-root.title("GeckoScan v1.1")
+root.title("GeckoScan v1.11")
 root.geometry("480x320")
 root.iconbitmap("gecko_scan_icon.ico")
 root.resizable(width=False, height=False)
