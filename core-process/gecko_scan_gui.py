@@ -11,13 +11,14 @@ os.chdir(script_path)
 from gecko_scan_libraries import sys
 from gecko_scan_libraries import tkinter as tk
 from gecko_scan_libraries import threading as td
-from gecko_scan_libraries import config_create, config_read, config_save
+from gecko_scan_libraries import config_create, config_read_check, config_read_path, config_save
 from gecko_scan_functions import main1, main2, main3
 
 config_create()
 
 def execute():
-    config_save(text1.get(), text2.get(), text3.get())
+    config_save(accept1.get(), accept2.get(), accept3.get(), 
+                text1.get(), text2.get(), text3.get())
     if accept1.get() == "Accepted": main1(text1.get())
     if accept2.get() == "Accepted": main2(text2.get())
     if accept3.get() == "Accepted": main3(text3.get())
@@ -49,9 +50,9 @@ button1.grid(row=3, column=0, sticky="nswe", padx=20, pady=10)
 button2.grid(row=3, column=1, sticky="nswe", padx=20, pady=10)
 
 # %% Defining Functionality - Checkbox
-accept1 = tk.StringVar(value="Accepted")
-accept2 = tk.StringVar(value="Accepted")
-accept3 = tk.StringVar(value="Not Accepted")
+accept1 = tk.StringVar(value=config_read_check("check_all_crypto"))
+accept2 = tk.StringVar(value=config_read_check("check_categories"))
+accept3 = tk.StringVar(value=config_read_check("check_database"))
 
 check1 = tk.Checkbutton(frame1, text="Daily Snapshot of All Cryptocurrencies",
                         variable=accept1, onvalue="Accepted", offvalue="Not Accepted")
@@ -65,9 +66,9 @@ check2.grid(row=1, column=0, sticky="w")
 check3.grid(row=2, column=0, sticky="w")
 
 # %% Defining Functionality - Save Location
-path1 = tk.StringVar(value=config_read("output_path_all_crypto")[0])
-path2 = tk.StringVar(value=config_read("output_path_categories")[0])
-path3 = tk.StringVar(value=config_read("output_path_database")[0])
+path1 = tk.StringVar(value=config_read_path("output_path_all_crypto")[0])
+path2 = tk.StringVar(value=config_read_path("output_path_categories")[0])
+path3 = tk.StringVar(value=config_read_path("output_path_database")[0])
 
 label1 = tk.Label(frame2, text="Snapshot (All)")
 label2 = tk.Label(frame2, text="Snapshot (Category)  ")

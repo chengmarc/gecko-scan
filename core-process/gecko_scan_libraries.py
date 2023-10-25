@@ -41,7 +41,8 @@ The graph below is an overview of the call structure of the functions.
 │   └───get_filename()              # get the file name of a given page
 │
 ├───config_create()                 # detect config and create one if not exist
-├───config_read()                   # read from config
+├───config_read_check()             # read from section [Checks] in config
+├───config_read_path()              # read from section [Paths] in config
 ├───config_save()                   # save to config
 │
 ├───get_datetime()                  # get current datetime
@@ -49,14 +50,17 @@ The graph below is an overview of the call structure of the functions.
 ├───notice_wait_20()                # user notice
 ├───notice_save_desired()           # user notice
 ├───notice_save_default()           # user notice
+│
 ├───error_url_timeout()             # user notice
 ├───error_data_timeout()            # user notice
 └───error_save_failed()             # user notice
 """
 
+
 # %% Fake headers to bypass CloudFlare
 base_url = "https://www.coingecko.com/"
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
 
 # %% Functions for getting key information in each category
 
@@ -279,9 +283,13 @@ def config_create() -> None:
     This function detects if the config file exist.
     If not, it will create the config file with default save locations.
     """
-    config_file = r"C:\Users\Public\config.ini"
+    config_file = r"C:\Users\Public\config_gecko_scan.ini"
     if not os.path.exists(config_file):
-        content = ("[Paths]\n"
+        content = ("[Checks]\n"
+                   "check_all_crypto=Accepted\n"
+                   "check_categories=Accepted\n"
+                   "check_database=Not Accepted\n"
+                   "[Paths]\n"
                    r"output_path_all_crypto=C:\Users\Public\Documents" + "\n"
                    r"output_path_categories=C:\Users\Public\Documents" + "\n"
                    r"output_path_database=C:\Users\Public\Documents" + "\n")
@@ -290,7 +298,20 @@ def config_create() -> None:
             f.close()
 
 
-def config_read(selection: str) -> (str, bool):
+def config_read_check(selection: str) -> str:
+    """
+    Given a selection, this function will return the corresponding path.
+
+    Return:         a string that represents either checked or not checked
+    """
+    config_file = r"C:\Users\Public\config_gecko_scan.ini"
+    config = configparser.ConfigParser()
+    config.read(config_file)
+    config_check = config.get("Checks", selection)
+    return config_check
+
+
+def config_read_path(selection: str) -> (str, bool):
     """
     Given a selection, this function will return the corresponding path.
 
@@ -298,7 +319,7 @@ def config_read(selection: str) -> (str, bool):
                     the string represents the path
                     the boolean represents the validity of the path
     """
-    config_file = r"C:\Users\Public\config.ini"
+    config_file = r"C:\Users\Public\config_gecko_scan.ini"
     config = configparser.ConfigParser()
     config.read(config_file)
     config_path = config.get("Paths", selection)
@@ -309,12 +330,17 @@ def config_read(selection: str) -> (str, bool):
         return config_path, False
 
 
-def config_save(path1, path2, path3) -> None:
+def config_save(check1, check2, check3,
+                path1, path2, path3) -> None:
     """
     Given three strings, this function will save the strings to the config file.
     """
-    config_file = r"C:\Users\Public\config.ini"
-    content = ("[Paths]\n"
+    config_file = r"C:\Users\Public\config_gecko_scan.ini"
+    content = ("[Checks]\n"
+               f"check_all_crypto={check1}\n"
+               f"check_categories={check2}\n"
+               f"check_database={check3}\n"
+               "[Paths]\n"
                f"output_path_all_crypto={path1}\n"
                f"output_path_categories={path2}\n"
                f"output_path_database={path3}\n")
