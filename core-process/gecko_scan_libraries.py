@@ -182,7 +182,7 @@ def extract_dataframe(headers: dict, url_lst: list[str], threshold: int) -> (pd.
         time.sleep(0.5) 
 
         threshold += 1
-        if threshold % 5 == 0:
+        if threshold % 20 == 0:
             info_wait()
             time.sleep(20)
 
