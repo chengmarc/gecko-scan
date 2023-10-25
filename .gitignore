@@ -1,5 +1,3 @@
 __venv__
 core-process/__pycache__
-core-process/build
-core-process/dist
-core-process/gecko_scan_gui.spec
+core-process/disttribution
