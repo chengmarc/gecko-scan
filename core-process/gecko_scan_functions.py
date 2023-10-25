@@ -26,44 +26,22 @@ def main1(path):
         pages = [gsl.base_url]
         for i in range(2, total_pages + 1):
             pages.append(f"{gsl.base_url}?page={str(i)}")
-        print(gsl.Fore.WHITE + "Successfully extracted URLs.")
+
+        gsl.notice_url_success(len(pages))
 
     except:
         gsl.error_url_timeout()
 
     """
     This try-except block will:
-        1. Create an empty dataframe to store data
-        2. Send a request to each url in the given list
-        3. Transform the obtained html into a sub dataframe
-        4. Append each sub dataframe to the main dataframe
-        5. Clean the main dataframe
+        1. Extract a dataframe for all cryptocurrencies
+        2. Clean the dataframe
     """
     try:
-        print("")
-        reset_threshold, df_clean = 0, gsl.pd.DataFrame(
-            columns=["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"])
+        df, threshold = gsl.extract_dataframe(gsl.headers, pages, 0)
+        df = gsl.trim_dataframe(df)
 
-        for url in pages:
-            response = gsl.requests.get(url, headers=gsl.headers)
-            html = response.content
-            soup = gsl.bs(html, "html.parser")
-            soup = soup.find("div", class_="coingecko-table")
-            df_page = gsl.extract_page(soup)
-            df_clean = gsl.pd.concat([df_clean, df_page], axis=0, ignore_index=True)
-            print(gsl.Fore.WHITE, "- Extracting information...")
-            gsl.time.sleep(0.5)
-
-            reset_threshold += 1
-            if reset_threshold > 25:
-                gsl.notice_wait_20()
-                reset_threshold = 0
-                gsl.time.sleep(20)
-
-        df_clean = gsl.trim_dataframe(df_clean)
-
-        print("")
-        print(gsl.Fore.GREEN + "All data ready.")
+        gsl.info_data_ready()
 
     except:
         gsl.error_data_timeout()
@@ -76,7 +54,8 @@ def main1(path):
     try:
         output_path = path
         output_name = f"all-crypto-{gsl.get_datetime()}.csv"
-        df_clean.to_csv(gsl.os.path.join(output_path, output_name))
+        df.to_csv(gsl.os.path.join(output_path, output_name))
+        
         gsl.notice_save_success()
 
     except:
@@ -104,7 +83,8 @@ def main2(path):
             if "categories" in href and "ecosystem" not in href:
                 categories_url.append(gsl.base_url + href)
                 categories_url = list(dict.fromkeys(categories_url))
-        print(gsl.Fore.WHITE + "Successfully extracted URLs.")
+
+        gsl.notice_url_success(len(categories_url))
 
     except:
         gsl.error_url_timeout()
@@ -118,26 +98,18 @@ def main2(path):
         5. Store the cleaned dataframe in the dictionary
     """
     try:
-        print("")
-        data_dictionary, reset_threshold = {}, 0
-
+        data_dictionary, threshold = {}, 0
         for url in categories_url:
             category = gsl.get_category_name(url)
             num = gsl.get_num_of_pages(gsl.headers, url)
             pages = gsl.get_page_list(num, url)
-            data = gsl.extract_dataframe(gsl.headers, pages)
-            data = gsl.trim_dataframe(data)
-            data_dictionary[category] = data
-            print(gsl.Fore.WHITE, f"- Successfully extracted data for {category}")
 
-            reset_threshold += num
-            if reset_threshold > 25:
-                gsl.notice_wait_20()
-                reset_threshold = 0
-                gsl.time.sleep(20)
+            df, threshold = gsl.extract_dataframe(gsl.headers, pages, threshold)
+            df = gsl.trim_dataframe(df)
+            data_dictionary[category] = df
+            gsl.info_category(category)
 
-        print("")
-        print(gsl.Fore.GREEN + "All data ready.")
+        gsl.info_data_ready()
 
     except:
         gsl.error_data_timeout()
@@ -152,6 +124,7 @@ def main2(path):
         for category, dataframe in data_dictionary.items():
             output_name = f"{category}-{gsl.get_datetime()}.csv"
             dataframe.to_csv(gsl.os.path.join(output_path, output_name))
+
         gsl.notice_save_success()
 
     except:
@@ -160,7 +133,7 @@ def main2(path):
 
 def main3(path):
 
-    gsl.notice_start("Extract Historical Database")  
+    gsl.notice_start("Extract Historical Database")
 
     """
     This try-except block will:
@@ -169,13 +142,13 @@ def main3(path):
     """
     try:
         url_list = [f"https://www.coingecko.com/price_charts/export/{str(i+1)}/usd.csv" for i in range(32000)]
-        print(gsl.Fore.WHITE + f"{len(url_list)} URLs has been loaded.")
-
         batch_size = 1000
         batch_list = []
         for i in range(0, len(url_list), batch_size):
             batch_list.append(url_list[i:i + batch_size])
-        print(gsl.Fore.WHITE + f"{len(batch_list)} batches has been created.")
+
+        gsl.notice_batch_size(len(batch_list))
+
     except:
         gsl.error_url_timeout()
 
@@ -185,13 +158,13 @@ def main3(path):
         1. Recursively download the database for each batch
     """
     try:
-        print("")
         output_path = path
         for url_list in batch_list:
             gsl.recursive_download(url_list, output_path)
-        print("")
-        print(gsl.Fore.GREEN + "All data ready.")
+            
+        gsl.info_data_ready()
         gsl.notice_save_success()
 
     except:
         gsl.error_save_failed()
+

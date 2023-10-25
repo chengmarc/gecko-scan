@@ -16,26 +16,30 @@ from gecko_scan_functions import main1, main2, main3
 
 config_create()
 
+
 def execute():
-    config_save(accept1.get(), accept2.get(), accept3.get(), 
+    config_save(accept1.get(), accept2.get(), accept3.get(),
                 text1.get(), text2.get(), text3.get())
     if accept1.get() == "Accepted": main1(text1.get())
     if accept2.get() == "Accepted": main2(text2.get())
     if accept3.get() == "Accepted": main3(text3.get())
 
+
 def thread_execute():
     thread = td.Thread(target=execute) 
     thread.start()
 
+
 # %% Initialize Window
 root = tk.Tk()
-root.title("GeckoScan v1.11")
+root.title("GeckoScan v1.12")
 root.geometry("480x320")
 root.iconbitmap("gecko_scan_icon.ico")
 root.resizable(width=False, height=False)
 
 window = tk.Frame(root)
 window.pack(expand=True)
+
 
 # %% Creating Main Frames
 frame1 = tk.LabelFrame(window, text="Extraction Options")
@@ -48,6 +52,7 @@ frame2.grid(row=2, column=0, sticky="nswe", padx=20, pady=10, columnspan=2)
 frame2.columnconfigure(1, weight=1)
 button1.grid(row=3, column=0, sticky="nswe", padx=20, pady=10)
 button2.grid(row=3, column=1, sticky="nswe", padx=20, pady=10)
+
 
 # %% Defining Functionality - Checkbox
 accept1 = tk.StringVar(value=config_read_check("check_all_crypto"))
@@ -64,6 +69,7 @@ check3 = tk.Checkbutton(frame1, text="Database of Historical Prices",
 check1.grid(row=0, column=0, sticky="w")
 check2.grid(row=1, column=0, sticky="w")
 check3.grid(row=2, column=0, sticky="w")
+
 
 # %% Defining Functionality - Save Location
 path1 = tk.StringVar(value=config_read_path("output_path_all_crypto")[0])
@@ -84,5 +90,7 @@ text1.grid(row=0, column=1, sticky="e")
 text2.grid(row=1, column=1, sticky="e")
 text3.grid(row=2, column=1, sticky="e")
 
+
 # %% Launch User Interface
 window.mainloop()
+

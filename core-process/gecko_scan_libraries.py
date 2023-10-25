@@ -45,15 +45,7 @@ The graph below is an overview of the call structure of the functions.
 ├───config_read_path()              # read from section [Paths] in config
 ├───config_save()                   # save to config
 │
-├───get_datetime()                  # get current datetime
-│
-├───notice_wait_20()                # user notice
-├───notice_save_desired()           # user notice
-├───notice_save_default()           # user notice
-│
-├───error_url_timeout()             # user notice
-├───error_data_timeout()            # user notice
-└───error_save_failed()             # user notice
+└───get_datetime()                  # get current datetime
 """
 
 
@@ -101,7 +93,7 @@ def get_num_of_pages(headers: dict, category_url: str) -> int:
     return num
 
 
-def get_page_list(num: int, category_url: str) -> list:
+def get_page_list(num: int, category_url: str) -> list[str]:
     """
     The fucntion takes the category url and the number of pages to return a list of urls in this category.
 
@@ -159,19 +151,21 @@ def extract_page(soup) -> pd.DataFrame:
     return df
 
 
-def extract_dataframe(headers: dict, url_lst: list) -> "pd.DataFrame":
+def extract_dataframe(headers: dict, url_lst: list[str], threshold: int) -> (pd.DataFrame, int):
     """
     The function takes given headers and sends a request to the list of urls,
     and returns a concatenated pandas dataframe.
 
     Precondition:   url_list is a list of strings that contains the urls of all the pages in a category
     Return:         a pandas dataframe that contains all the market data of this category
+                    a integer that represent the threshold
 
     # Example
     input:  headers,  ["www.coingecko.com/en/categories/smart-contract-platform",
-                       "www.coingecko.com/en/categories/smart-contract-platform?page=2"]
+                       "www.coingecko.com/en/categories/smart-contract-platform?page=2"], 0
 
-    output: a pandas dataframe with 150 rows of market data (100 rows on the first page, 50 rows on the second)
+    output: a pandas dataframe with 150 rows of market data 
+            (100 rows on the first page, 50 rows on the second), 2
     """
     df_clean = pd.DataFrame(
         columns=["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"])
@@ -184,13 +178,18 @@ def extract_dataframe(headers: dict, url_lst: list) -> "pd.DataFrame":
         df_page = extract_page(soup)
         df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
 
-        print(Fore.WHITE, "- Extracting information...")
-        time.sleep(0.5)
+        info_extracting()
+        time.sleep(0.5) 
 
-    return df_clean
+        threshold += 1
+        if threshold % 5 == 0:
+            info_wait()
+            time.sleep(20)
+
+    return df_clean, threshold
 
 
-def trim_dataframe(df: "pd.DataFrame") -> "pd.DataFrame":
+def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
     The function takes a pandas dataframe and removes currency symbols and empty spaces.
 
@@ -239,7 +238,7 @@ def get_filename(response: requests.Response, url: str) -> str:
     return number + filename
 
 
-def recursive_download(url_list: list, output_path: str):
+def recursive_download(url_list: list[str], output_path: str):
     """
     This function takes a list of valid urls and downloads the corresponding .csv files contained to a given path.
 
@@ -259,17 +258,17 @@ def recursive_download(url_list: list, output_path: str):
         output_name = get_filename(response, url)
         df = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
         df.to_csv(os.path.join(output_path, output_name), encoding="utf-8")
-        print(Fore.WHITE, f"- Downloaded {url}")
+        info_database(200, url)
         time.sleep(0.5)
     elif response.status_code == 404:
         url_list.pop(0)
-        print(Fore.WHITE, f"- Discarded {url}")
+        info_database(404, url)
         time.sleep(0.5)
     elif response.status_code == 403:
-        print(Fore.YELLOW, f"- Skipped {url}")
+        info_database(403, url)
         time.sleep(0.5)
     elif response.status_code == 429:
-        print(Fore.YELLOW, f"- Skipped {url}")
+        info_database(429, url)
         time.sleep(20)
 
     return recursive_download(url_list, output_path)
@@ -323,7 +322,7 @@ def config_read_path(selection: str) -> (str, bool):
     config = configparser.ConfigParser()
     config.read(config_file)
     config_path = config.get("Paths", selection)
-    
+
     if os.path.isdir(config_path):
         return config_path, True
     else:
@@ -352,7 +351,7 @@ def config_save(check1, check2, check3,
 def get_datetime() -> str:
     """
     This function returns a string that represents the current datetime.
-    
+
     Return:         a string of the format: %Y-%m-%d_%H-%M-%S
     """
     current_datetime = datetime.datetime.now()
@@ -372,15 +371,47 @@ def notice_start(name: str) -> None:
     print("")
 
 
-def notice_wait_20() -> None:
+def notice_url_success(n) -> None:
+    print(Fore.WHITE + "Successfully extracted URLs.")
+    print(Fore.WHITE + f"{n} URLs has been loaded.")
     print("")
-    print(Fore.YELLOW + "Wait 20 seconds to avoid being blocked.")
+
+
+def notice_batch_size(n) -> None:
+    print(Fore.WHITE + "Successfully created batches.")
+    print(Fore.WHITE + f"{n} batches has been loaded.")
     print("")
 
 
 def notice_save_success() -> None:
     print(Fore.WHITE + "Successfully loaded output config.")
     print(Fore.WHITE + "Data has been saved to the desired location.")
+    print("")
+
+
+def info_extracting() -> None:
+    print(Fore.WHITE + "INFO: Extracting information...")
+
+
+def info_wait() -> None:
+    print(Fore.YELLOW + "INFO: Wait 20 seconds to avoid being blocked.")
+
+
+def info_category(category:str) -> None:
+    print(Fore.WHITE + f"INFO: Successfully extracted data for {category}")
+
+
+def info_database(code, url) -> None:
+    if code == 200:
+        print(Fore.WHITE + f"INFO: Downloaded {url}")
+    elif code == 404:
+        print(Fore.WHITE + f"INFO: Discarded {url}")
+    elif code == 403 or code == 429:
+        print(Fore.YELLOW + f"INFO: Skipped {url}")
+
+
+def info_data_ready() -> None:
+    print(Fore.GREEN + "INFO: All data ready.")
     print("")
 
 
@@ -403,3 +434,4 @@ def error_save_failed() -> None:
     print(Fore.RED + "Failed to save extracted data, please check your config.")
     getpass.getpass("Press enter to quit...")
     sys.exit()
+
