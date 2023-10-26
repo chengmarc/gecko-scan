@@ -204,9 +204,11 @@ def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         df[column] = df[column].str.strip()
 
     # Remove USD currency symbol
-    df["Price"] = df["Price"].str[1:]
-    df["Volume24h"] = df["Volume24h"].str[1:]
-    df["MarketCap"] = df["MarketCap"].str[1:]
+    df["Price"] = df["Price"].str.replace('Buy', '')
+    df["Price"] = df["Price"].str.strip()
+    df["Price"] = df["Price"].str.replace('$', '')
+    df["Volume24h"] = df["Volume24h"].str.replace('$', '')
+    df["MarketCap"] = df["MarketCap"].str.replace('$', '')
 
     return df
 
