@@ -12,13 +12,11 @@ try:
     import requests
     import pandas as pd
     from bs4 import BeautifulSoup as bs
-    from colorama import init, Fore
-    init()
-    print(Fore.GREEN + "Core modules imported.")
+    print("SYSTEM: Core modules imported.")
 
 except ImportError as e:
-    print(f"The module '{e.name}' is not found, please install it using either pip or conda.")
-    getpass.getpass("Press Enter to quit in a few seconds...")
+    print(f"SYSTEM: The module '{e.name}' is not found, please install it using either pip or conda.")
+    getpass.getpass("SYSTEM: Press Enter to quit in a few seconds...")
     sys.exit()
 
 
@@ -367,73 +365,73 @@ def get_datetime() -> str:
 def notice_start(name: str) -> None:
     length = len(name) + 6*2
     print("")
-    print(Fore.WHITE + length*"#")
-    print(Fore.WHITE + f"##### {name} #####")
-    print(Fore.WHITE + length*"#")
+    print(length*"#")
+    print(f"##### {name} #####")
+    print(length*"#")
     print("")
 
 
 def notice_url_success(n) -> None:
-    print(Fore.WHITE + "Successfully extracted URLs.")
-    print(Fore.WHITE + f"{n} URLs has been loaded.")
+    print("INFO: Successfully extracted URLs.")
+    print(f"INFO: {n} URLs has been loaded.")
     print("")
 
 
 def notice_batch_size(n) -> None:
-    print(Fore.WHITE + "Successfully created batches.")
-    print(Fore.WHITE + f"{n} batches has been loaded.")
+    print("INFO: Successfully created batches.")
+    print(f"INFO: {n} batches has been loaded.")
     print("")
 
 
 def notice_save_success() -> None:
-    print(Fore.WHITE + "Successfully loaded output config.")
-    print(Fore.WHITE + "Data has been saved to the desired location.")
+    print("SYSTEM: Successfully loaded output config.")
+    print("SYSTEM: Data has been saved to the desired location.")
     print("")
 
 
 def info_extracting() -> None:
-    print(Fore.WHITE + "INFO: Extracting information...")
+    print("INFO: Extracting information...")
 
 
 def info_wait() -> None:
-    print(Fore.YELLOW + "INFO: Wait 20 seconds to avoid being blocked.")
+    print("INFO: Wait 20 seconds to avoid being blocked.")
 
 
 def info_category(category:str) -> None:
-    print(Fore.WHITE + f"INFO: Successfully extracted data for {category}")
+    print(f"INFO: Successfully extracted data for {category}")
 
 
 def info_database(code, url) -> None:
     if code == 200:
-        print(Fore.WHITE + f"INFO: Downloaded {url}")
+        print(f"INFO: Downloaded {url}")
     elif code == 404:
-        print(Fore.WHITE + f"INFO: Discarded {url}")
+        print(f"INFO: Discarded {url}")
     elif code == 403 or code == 429:
-        print(Fore.YELLOW + f"INFO: Skipped {url}")
+        print(f"INFO: Skipped {url}")
 
 
 def info_data_ready() -> None:
-    print(Fore.GREEN + "INFO: All data ready.")
+    print("INFO: All data ready.")
     print("")
 
 
 def error_url_timeout() -> None:
     print("")
-    print(Fore.RED + "URL extraction timeout, please try again.")
-    getpass.getpass("Press enter to quit...")
+    print("SYSTEM: URL extraction timeout, please try again.")
+    getpass.getpass("SYSTEM: Press enter to quit...")
     sys.exit()
 
 
 def error_data_timeout() -> None:
     print("")
-    print(Fore.RED + "Data extraction timeout, please try again.")
-    getpass.getpass("Press enter to quit...")
+    print("SYSTEM: Data extraction timeout, please try again.")
+    getpass.getpass("SYSTEM: Press enter to quit...")
     sys.exit()
 
 
 def error_save_failed() -> None:
     print("")
-    print(Fore.RED + "Failed to save extracted data, please check your config.")
-    getpass.getpass("Press enter to quit...")
+    print("SYSTEM: Failed to save extracted data, please check your config.")
+    getpass.getpass("SYSTEM: Press enter to quit...")
     sys.exit()
 
