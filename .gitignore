@@ -1,4 +1,4 @@
 __venv__
 core-process/__pycache__
 core-process/distribution
-core-process/gecko_scan_gui.spec
+core-process/GeckoScan.spec
