@@ -30,7 +30,8 @@ The graph below is an overview of the call structure of the functions.
 │   
 ├───extract_dataframe()             # extract dataframe from a list of urls
 │   │
-│   └───extract_page()              # extract data from a given page
+│   ├───extract_page_normal()       # extract data from a given page (method 1)
+│   └───extract_page_category()     # extract data from a given page (method 2)
 │
 ├───trim_dataframe()                # clean a given dataframe
 │
@@ -49,7 +50,7 @@ The graph below is an overview of the call structure of the functions.
 
 # %% Fake headers to bypass CloudFlare
 base_url = "https://www.coingecko.com/"
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 RuxitSynthetic/1.0 v12092192177 t5422275089828169976 athfa3c3975 altpub cvcv=2 smf=0'}
 
 
 # %% Functions for getting key information in each category
@@ -114,7 +115,38 @@ def get_page_list(num: int, category_url: str) -> list[str]:
 # %% Functions for data mining
 
 
-def extract_page(soup) -> pd.DataFrame:
+def extract_page_normal(soup) -> pd.DataFrame:
+    """
+    The function takes a BeautifulSoup soup object and returns a pandas dataframe.
+
+    Precondition:   soup is a BeautifulSoup object parsed from a specific page html
+    Return:         a pandas dataframe that contains the market data of the given page
+
+    # Example
+    input:  a BeautifulSoup object parsed from "www.coingecko.com/en/categories/smart-contract-platform"
+    output: a pandas dataframe with 100 rows of market data
+    """
+    rows = soup.find_all("tr", class_="hover:tw-bg-gray-50 tw-bg-white dark:tw-bg-moon-900 hover:dark:tw-bg-moon-800 tw-font-medium tw-text-sm")
+
+    df = []
+    for row in rows:
+        symbol = row.find("div", class_="tw-text-xs tw-leading-4 tw-text-gray-500 dark:tw-text-moon-200 tw-font-medium tw-block 2lg:tw-inline")    
+        name = row.find("div", class_="tw-text-gray-700 dark:tw-text-moon-100 tw-font-semibold tw-text-sm tw-leading-5")
+        row_list = [symbol.get_text(), name.get_text()]
+
+        cells = row.find_all("td", class_="tw-text-gray-900 dark:tw-text-moon-50 tw-px-1 tw-py-2.5 2lg:tw-p-2.5 tw-bg-inherit tw-text-end")
+        for cell in cells:
+            row_list.append(cell.get_text())
+
+        df.append(row_list)
+
+    df = pd.DataFrame(df)
+    df.columns = ["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"]
+
+    return df
+
+
+def extract_page_category(soup) -> pd.DataFrame:
     """
     The function takes a BeautifulSoup soup object and returns a pandas dataframe.
 
@@ -149,7 +181,7 @@ def extract_page(soup) -> pd.DataFrame:
     return df
 
 
-def extract_dataframe(headers: dict, url_lst: list[str], threshold: int) -> (pd.DataFrame, int):
+def extract_dataframe(headers: dict, url_lst: list[str], threshold: int, normal: bool)  -> (pd.DataFrame, int):
     """
     The function takes given headers and sends a request to the list of urls,
     and returns a concatenated pandas dataframe.
@@ -171,9 +203,10 @@ def extract_dataframe(headers: dict, url_lst: list[str], threshold: int) -> (pd.
     for url in url_lst:
         response = requests.get(url, headers=headers)
         html = response.content
-        soup = bs(html, "html.parser").find("div", class_="coingecko-table")
+        soup = bs(html, "html.parser")
 
-        df_page = extract_page(soup)
+        if normal: df_page = extract_page_normal(soup)
+        else: df_page = extract_page_category(soup)
         df_clean = pd.concat([df_clean, df_page], axis=0, ignore_index=True)
 
         info_extracting()

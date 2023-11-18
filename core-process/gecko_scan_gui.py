@@ -37,7 +37,7 @@ def exit():
 
 # %% Initialize Window
 root = tk.Tk()
-root.title("GeckoScan v1.2")
+root.title("GeckoScan v1.21")
 root.iconbitmap("gecko_scan_icon.ico")
 root.resizable(width=False, height=False)
 

@@ -4,6 +4,10 @@
 @github: https://github.com/chengmarc
 
 """
+import os
+script_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(script_path)
+#%%
 import gecko_scan_libraries as gsl
 
 
@@ -20,9 +24,9 @@ def main1(path):
     try:
         response = gsl.requests.get("https://www.coingecko.com/", headers=gsl.headers)
         html = response.content
-        soup = gsl.bs(html, "html.parser").find_all("li", class_="page-item")
+        soup = gsl.bs(html, "html.parser").find_all("a", class_="tw-relative tw-inline-flex tw-items-center tw-rounded-lg tw-px-4 tw-py-1.5 tw-text-sm tw-font-semibold !tw-text-gray-900 hover:tw-bg-gray-50 dark:!tw-text-moon-50 dark:hover:tw-bg-moon-700")
 
-        total_pages = int([obj.get_text() for obj in soup][-2])
+        total_pages = int([obj.get_text() for obj in soup][-1])
         pages = [gsl.base_url]
         for i in range(2, total_pages + 1):
             pages.append(f"{gsl.base_url}?page={str(i)}")
@@ -38,7 +42,7 @@ def main1(path):
         2. Clean the dataframe
     """
     try:
-        df, threshold = gsl.extract_dataframe(gsl.headers, pages, 0)
+        df, threshold = gsl.extract_dataframe(gsl.headers, pages, 0, True)
         df = gsl.trim_dataframe(df)
 
         gsl.info_data_ready()
@@ -104,7 +108,7 @@ def main2(path):
             num = gsl.get_num_of_pages(gsl.headers, url)
             pages = gsl.get_page_list(num, url)
 
-            df, threshold = gsl.extract_dataframe(gsl.headers, pages, threshold)
+            df, threshold = gsl.extract_dataframe(gsl.headers, pages, threshold, False)
             df = gsl.trim_dataframe(df)
             data_dictionary[category] = df
             gsl.info_category(category)
