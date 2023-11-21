@@ -4,10 +4,6 @@
 @github: https://github.com/chengmarc
 
 """
-import os
-script_path = os.path.dirname(os.path.realpath(__file__))
-os.chdir(script_path)
-#%%
 import gecko_scan_libraries as gsl
 
 

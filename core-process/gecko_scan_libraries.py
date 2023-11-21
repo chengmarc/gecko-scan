@@ -126,7 +126,7 @@ def extract_page_normal(soup) -> pd.DataFrame:
     input:  a BeautifulSoup object parsed from "www.coingecko.com/en/categories/smart-contract-platform"
     output: a pandas dataframe with 100 rows of market data
     """
-    rows = soup.find_all("tr", class_="hover:tw-bg-gray-50 tw-bg-white dark:tw-bg-moon-900 hover:dark:tw-bg-moon-800 tw-font-medium tw-text-sm")
+    rows = soup.find_all("tr", class_="hover:tw-bg-gray-50 tw-bg-white dark:tw-bg-moon-900 hover:dark:tw-bg-moon-800 tw-text-sm")
 
     df = []
     for row in rows:
