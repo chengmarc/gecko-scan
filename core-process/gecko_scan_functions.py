@@ -20,7 +20,7 @@ def main1(path):
     try:
         response = gsl.requests.get("https://www.coingecko.com/", headers=gsl.headers)
         html = response.content
-        soup = gsl.bs(html, "html.parser").find_all("a", class_="tw-relative tw-inline-flex tw-items-center tw-rounded-lg tw-px-4 tw-py-1.5 tw-text-sm tw-font-semibold !tw-text-gray-900 hover:tw-bg-gray-50 dark:!tw-text-moon-50 dark:hover:tw-bg-moon-700")
+        soup = gsl.bs(html, "html.parser").find_all("a", class_="tw-cursor-pointer tw-relative tw-inline-flex tw-items-center tw-rounded-lg tw-px-4 tw-py-1.5 tw-text-sm tw-font-semibold !tw-text-gray-900 hover:tw-bg-gray-50 dark:!tw-text-moon-50 dark:hover:tw-bg-moon-700")
 
         total_pages = int([obj.get_text() for obj in soup][-1])
         pages = [gsl.base_url]
