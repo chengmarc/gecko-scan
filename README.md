@@ -1,7 +1,14 @@
 # Introduction
+**Notice: 1.3 is the last version of GeckoScan, support for this application has ended.**
+
 **gecko-scan** is a web crawler that extract data from the famous cryptocurrency website CoinGecko (a site that hosts up-to-date data on cryptocurrencies). **gecko-scan** will help you download all the data into **.csv** format and store it locally, so that you can perform quantitative analysis using your favourite data science tools.
 
+# Pre-requisite
+Make sure you have the latest version of **Mozilla Firefox**. \
+Support for **Google Chrome** has ended.
+
 # First time use
+
 Go to **Releases** on the right of this page, and download the **.exe** file. That's it.
 
 If you have Python installed, you can also: 
@@ -15,6 +22,5 @@ Normally, you only need to check the first two checkbox. This will takes around 
 For historical data, you need to check **Database of Historical Prices**. This will takes around *10 hours* and extract the historical data of around 25000 coins and tokens. 
 
 # Save location
-By default, data are saved under "<ins>C:\Users\Public\Documents</ins>" \
+By default, data are saved under "<ins>C:\Users\Public\Documents</ins>", database is saved under your download folder. \
 If you want to change the output location, please edit in **config.ini** under "<ins>C:\Users\Public</ins>".
-
