@@ -4,7 +4,7 @@
 @github: https://github.com/chengmarc
 
 """
-import re, io, os, sys, time, datetime, configparser, getpass, threading
+import re, io, os, sys, time, datetime, configparser, getpass, threading, random
 from urllib.parse import urlparse
 
 try:
@@ -44,13 +44,41 @@ The graph below is an overview of the call structure of the functions.
 ├───config_read_path()              # read from section [Paths] in config
 ├───config_save()                   # save to config
 │
-└───get_datetime()                  # get current datetime
+├───get_datetime()                  # get current datetime
 """
 
 
 # %% Fake headers to bypass CloudFlare
 base_url = "https://www.coingecko.com/"
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 RuxitSynthetic/1.0 v12092192177 t5422275089828169976 athfa3c3975 altpub cvcv=2 smf=0'}
+
+agent_list = [
+    {'User-Agent': 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 9_8_3) Gecko/20100101 Firefox/57.8'},
+    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.4; Win64; x64; en-US) Gecko/20130401 Firefox/50.0'},
+    {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 10.4;) AppleWebKit/602.7 (KHTML, like Gecko) Chrome/50.0.3427.158 Safari/535'},
+    {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 9_9_0) AppleWebKit/534.47 (KHTML, like Gecko) Chrome/52.0.1333.275 Safari/537'},
+    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.2; WOW64) AppleWebKit/536.31 (KHTML, like Gecko) Chrome/50.0.1826.173 Safari/534'},
+    {'User-Agent': 'Mozilla/5.0 (Linux; U; Linux x86_64; en-US) AppleWebKit/603.40 (KHTML, like Gecko) Chrome/48.0.1697.142 Safari/537'},
+    {'User-Agent': 'Mozilla/5.0 (Windows; Windows NT 10.0; Win64; x64; en-US) AppleWebKit/603.29 (KHTML, like Gecko) Chrome/52.0.2305.265 Safari/601'},
+    {'User-Agent': 'Mozilla/5.0 (Windows; Windows NT 10.4;; en-US) AppleWebKit/603.14 (KHTML, like Gecko) Chrome/49.0.2454.349 Safari/600'},
+    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.3; WOW64) AppleWebKit/600.15 (KHTML, like Gecko) Chrome/54.0.3775.310 Safari/600.0 Edge/11.48575'},
+    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.5;) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/51.0.1326.199 Safari/537.8 Edge/12.30568'}]
+
+headers = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'en-CA,en-US;q=0.7,en;q=0.3',
+    'Alt-Userd': 'www.coingceko.com',
+    'Connection': 'keep-alive',
+    'Cookie': '_session_id=5bdb2abf405a2d9e6824309986d26ccb; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Feb+06+2024+08%3A40%3A38+GMT-0500+(Eastern+Standard+Time)&version=202312.1.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=b43e2efa-81af-45cd-8f91-4ea1d60ea6a0&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0004%3A0%2CC0003%3A1&AwaitingReconsent=false; __cf_bm=8vFmBQvD0t925PV.lonDVn6L61j8X5N0evU_3kgoewc-1707226826-1-AVrry33UfNU8MD+TKHQP+N/zgo0MtXYo+aGs+L1kaJ8AQi4xD5oE7VrYJCpMe92bEBfI2yclbKhun5mMLMBmGwU=',
+    'DNT': '1',
+    'Host': 'www.coingecko.com',
+    'Referer': 'https://www.coingecko.com/',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'same-origin',
+    'Sec-Fetch-User': '?1',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'}
 
 
 # %% Functions for getting key information in each category
@@ -73,7 +101,7 @@ def get_category_name(category_url: str) -> str:
     return filename
 
 
-def get_num_of_pages(headers: dict, category_url: str) -> int:
+def get_num_of_pages(driver, category_url: str) -> int:
     """
     The function takes the given headers and sends a request to the category url,
     and returns the number of pages in this category.
@@ -85,14 +113,14 @@ def get_num_of_pages(headers: dict, category_url: str) -> int:
     input:  headers, "www.coingecko.com/en/categories/smart-contract-platform"
     output: 2
     """
-    response = requests.get(category_url, headers=headers)
-    html = response.content
+    driver.get(category_url)
+    html = driver.page_source
     soup = bs(html, "html.parser").find_all("li", class_="page-item")
     num = int([obj.get_text() for obj in soup][-2])
     return num
 
 
-def get_page_list(num: int, category_url: str) -> list[str]:
+def get_page_list(num: int, category_url: str) -> list:
     """
     The fucntion takes the category url and the number of pages to return a list of urls in this category.
 
@@ -181,7 +209,7 @@ def extract_page_category(soup) -> pd.DataFrame:
     return df
 
 
-def extract_dataframe(headers: dict, url_lst: list[str], threshold: int, normal: bool)  -> (pd.DataFrame, int):
+def extract_dataframe(driver, url_lst: list[str], threshold: int, normal: bool)  -> (pd.DataFrame, int):
     """
     The function takes given headers and sends a request to the list of urls,
     and returns a concatenated pandas dataframe.
@@ -201,8 +229,8 @@ def extract_dataframe(headers: dict, url_lst: list[str], threshold: int, normal:
         columns=["Symbol", "Name", "Price", "Change1h", "Change24h", "Change7d", "Volume24h", "MarketCap"])
 
     for url in url_lst:
-        response = requests.get(url, headers=headers)
-        html = response.content
+        driver.get(url)
+        html = driver.page_source
         soup = bs(html, "html.parser")
 
         if normal: df_page = extract_page_normal(soup)
@@ -271,7 +299,7 @@ def get_filename(response: requests.Response, url: str) -> str:
     return number + filename
 
 
-def recursive_download(url_list: list[str], output_path: str):
+def recursive_download(driver, url_list: list[str], output_path: str):
     """
     This function takes a list of valid urls and downloads the corresponding .csv files contained to a given path.
 
@@ -283,7 +311,7 @@ def recursive_download(url_list: list[str], output_path: str):
         return
 
     url = url_list[0]
-    response = requests.get(url, headers=headers, stream=True)
+    response = requests.get(url, headers=agent_list[random.randint(0, 9)], stream=True)
     response.status_code
 
     if response.status_code == 200:

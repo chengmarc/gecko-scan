@@ -13,16 +13,19 @@ from gecko_scan_libraries import tkinter as tk
 from gecko_scan_libraries import threading as td
 from gecko_scan_libraries import config_create, config_read_check, config_read_path, config_save
 from gecko_scan_functions import main1, main2, main3
+from webdrivers.webdriver_initializer import start_webdriver, quit_webdriver
 
 config_create()
 
 
 def execute():
+    driver = start_webdriver()
     config_save(accept1.get(), accept2.get(), accept3.get(),
                 text1.get(), text2.get(), text3.get())
-    if accept1.get() == "Accepted": main1(text1.get())
-    if accept2.get() == "Accepted": main2(text2.get())
+    if accept1.get() == "Accepted": main1(driver, text1.get())
+    if accept2.get() == "Accepted": main2(driver, text2.get())
     if accept3.get() == "Accepted": main3(text3.get())
+    quit_webdriver(driver)
 
 
 def thread():

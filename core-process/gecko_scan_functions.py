@@ -7,7 +7,7 @@
 import gecko_scan_libraries as gsl
 
 
-def main1(path):
+def main1(driver, path):
 
     gsl.notice_start("Extract All Cryptocurrencies")
 
@@ -18,8 +18,8 @@ def main1(path):
         3. Store the urls of all pages into a list
     """
     try:
-        response = gsl.requests.get("https://www.coingecko.com/", headers=gsl.headers)
-        html = response.content
+        driver.get("https://www.coingecko.com/")
+        html = driver.page_source
         soup = gsl.bs(html, "html.parser").find_all("a", class_="tw-cursor-pointer tw-relative tw-inline-flex tw-items-center tw-rounded-lg tw-px-4 tw-py-1.5 tw-text-sm tw-font-semibold !tw-text-gray-900 hover:tw-bg-gray-50 dark:!tw-text-moon-50 dark:hover:tw-bg-moon-700")
 
         total_pages = int([obj.get_text() for obj in soup][-1])
@@ -38,7 +38,7 @@ def main1(path):
         2. Clean the dataframe
     """
     try:
-        df, threshold = gsl.extract_dataframe(gsl.headers, pages, 0, True)
+        df, threshold = gsl.extract_dataframe(driver, pages, 0, True)
         df = gsl.trim_dataframe(df)
 
         gsl.info_data_ready()
@@ -62,7 +62,7 @@ def main1(path):
         gsl.error_save_failed()
 
 
-def main2(path):
+def main2(driver, path):
 
     gsl.notice_start("Extract by Category")
 
@@ -73,8 +73,8 @@ def main2(path):
         3. Store the urls of each category into a list
     """
     try:
-        response = gsl.requests.get("https://www.coingecko.com/en/categories", headers=gsl.headers)
-        html = response.content
+        driver.get("https://www.coingecko.com/en/categories")
+        html = driver.page_source
         soup = gsl.bs(html, "html.parser").find("tbody").find_all("a")
 
         categories_url = []
@@ -101,10 +101,10 @@ def main2(path):
         data_dictionary, threshold = {}, 0
         for url in categories_url:
             category = gsl.get_category_name(url)
-            num = gsl.get_num_of_pages(gsl.headers, url)
+            num = gsl.get_num_of_pages(driver, url)
             pages = gsl.get_page_list(num, url)
 
-            df, threshold = gsl.extract_dataframe(gsl.headers, pages, threshold, False)
+            df, threshold = gsl.extract_dataframe(driver, pages, threshold, False)
             df = gsl.trim_dataframe(df)
             data_dictionary[category] = df
             gsl.info_category(category)
@@ -131,7 +131,7 @@ def main2(path):
         gsl.error_save_failed()
 
 
-def main3(path):
+def main3(driver, path):
 
     gsl.notice_start("Extract Historical Database")
 
@@ -160,7 +160,7 @@ def main3(path):
     try:
         output_path = path
         for url_list in batch_list:
-            gsl.recursive_download(url_list, output_path)
+            gsl.recursive_download(driver, url_list, output_path)
             
         gsl.info_data_ready()
         gsl.notice_save_success()
