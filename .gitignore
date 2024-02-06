@@ -1,4 +1,4 @@
-.log
+*.log
 __venv__
 core-process/__pycache__
 core-process/distribution

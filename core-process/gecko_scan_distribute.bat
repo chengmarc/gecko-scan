@@ -1,2 +1,2 @@
-pyinstaller --distpath .\distribution --workpath .\distribution --onefile --noconsole --name GeckoScan --add-data "gecko_scan_icon.ico;." --icon=gecko_scan_icon.ico gecko_scan_gui.py
+pyinstaller --distpath .\distribution --workpath .\distribution --onefile --noconsole --name GeckoScan --add-binary "webdrivers\geckodriver64.exe;webdrivers\." --add-binary "webdrivers\geckodriver32.exe;webdrivers\." --add-data "webdrivers\webdriver_initializer.py;webdrivers\." --add-data "links-creation\links.html;links-creation\." --add-data "gecko_scan_icon.ico;." --icon=gecko_scan_icon.ico gecko_scan_gui.py
 pause

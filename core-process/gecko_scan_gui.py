@@ -17,7 +17,7 @@ from webdrivers.webdriver_initializer import start_webdriver, quit_webdriver
 
 config_create()
 
-html_path = os.path.join(os.path.dirname(script_path), 'links-creation', 'links.html')
+html_path = os.path.join(script_path, 'links-creation', 'links.html')
 
 
 def execute():

@@ -39,7 +39,7 @@ The graph below is an overview of the call structure of the functions.
 ├───config_read_path()              # read from section [Paths] in config
 ├───config_save()                   # save to config
 │
-├───get_datetime()                  # get current datetime
+└───get_datetime()                  # get current datetime
 """
 
 
