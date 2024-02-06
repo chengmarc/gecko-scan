@@ -10,7 +10,6 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 try:
     from selenium.webdriver.common.by import By
     from selenium.webdriver import Firefox, Chrome
-    from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
     from selenium.webdriver.firefox.options import Options as FirefoxOptions
     from selenium.webdriver.firefox.service import Service as FirefoxService
     from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -45,15 +44,9 @@ def initialize_firefox(bit: int) -> Firefox:
     # mozilla/geckodriver 0.33.0
 
     options = FirefoxOptions()
-    #options.add_argument("-headless")
+    options.add_argument("-headless")
     options.add_argument("--width=1920")
     options.add_argument("--height=1080")
-    
-    profile = FirefoxProfile()
-    profile.set_preference("browser.download.folderList", 2)
-    profile.set_preference("browser.download.useDownloadDir", True)
-    profile.set_preference("browser.download.manager.showWhenStarting", False)
-    profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
 
     service = FirefoxService()
     service.creation_flags = subprocess.CREATE_NO_WINDOW
@@ -72,13 +65,8 @@ def initialize_chrome() -> Chrome:
     # ChromeDriver 119.0.6045.105 (r1204232)
 
     options = ChromeOptions()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("--window-size=1920,1080")
-    options.add_experimental_option("prefs", {
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-        "plugins.always_open_pdf_externally": True
-    })
 
     service = ChromeService()
     service.creation_flags = subprocess.CREATE_NO_WINDOW

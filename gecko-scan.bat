@@ -4,7 +4,7 @@ echo Starting virtual environment setup.
 echo.
 python -m venv __venv__
 call __venv__\Scripts\activate.bat
-pip install dependencies\dist\gsl-dependencies-1.2.tar.gz
+pip install dependencies\dist\gsl-dependencies-1.3.tar.gz
 echo.
 echo Virtual environment setup completed.
 echo.

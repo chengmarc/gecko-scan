@@ -1,5 +1,4 @@
 tk==0.1.0
-requests==2.31.0
 selenium==4.9.0
 pandas==2.1.0
 bs4==0.0.1

@@ -23,9 +23,9 @@ def main1(driver, path):
         soup = gsl.bs(html, "html.parser").find_all("a", class_="tw-cursor-pointer tw-relative tw-inline-flex tw-items-center tw-rounded-lg tw-px-4 tw-py-1.5 tw-text-sm tw-font-semibold !tw-text-gray-900 hover:tw-bg-gray-50 dark:!tw-text-moon-50 dark:hover:tw-bg-moon-700")
 
         total_pages = int([obj.get_text() for obj in soup][-1])
-        pages = [gsl.base_url]
+        pages = ["https://www.coingecko.com/"]
         for i in range(2, total_pages + 1):
-            pages.append(f"{gsl.base_url}?page={str(i)}")
+            pages.append(f"https://www.coingecko.com/?page={str(i)}")
 
         gsl.notice_url_success(len(pages))
 
@@ -81,7 +81,7 @@ def main2(driver, path):
         for link in soup:
             href = str(link.get("href"))
             if "categories" in href and "ecosystem" not in href:
-                categories_url.append(gsl.base_url + href)
+                categories_url.append("https://www.coingecko.com/" + href)
                 categories_url = list(dict.fromkeys(categories_url))
 
         gsl.notice_url_success(len(categories_url))
@@ -137,31 +137,27 @@ def main3(driver, path):
 
     """
     This try-except block will:
-        1. Create a list of urls that directs to the database
-        2. Seperate the full list into batches to prevent stack overflow
+        1. Open an html that contains all the download urls
+        2. Read all the urls
     """
     try:
-        url_list = [f"https://www.coingecko.com/price_charts/export/{str(i+1)}/usd.csv" for i in range(32000)]
-        batch_size = 1000
-        batch_list = []
-        for i in range(0, len(url_list), batch_size):
-            batch_list.append(url_list[i:i + batch_size])
-
-        gsl.notice_batch_size(len(batch_list))
+        driver.get(path)
+        links = driver.find_elements("css selector", "a")
+        gsl.notice_html_read_success(len(links))
 
     except:
         gsl.error_url_timeout()
 
     """
     This try-except block will:
-        1. Iterate through each batch in the given list
-        1. Recursively download the database for each batch
+        1. Click all the urls one by one
     """
     try:
-        output_path = path
-        for url_list in batch_list:
-            gsl.recursive_download(driver, url_list, output_path)
-            
+        for url in links:
+            driver.execute_script("window.open(arguments[0], '_blank');", url.get_attribute("href"))
+            gsl.info_database(url.text)
+            gsl.time.sleep(1)
+
         gsl.info_data_ready()
         gsl.notice_save_success()
 

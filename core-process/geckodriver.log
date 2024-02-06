@@ -584,3 +584,476 @@ WebDriver BiDi listening on ws://127.0.0.1:60717
 DevTools listening on ws://127.0.0.1:60717/devtools/browser/a6322767-146e-4e7f-9674-152440305f4c
 console.error: (new TypeError("linkMap is undefined", "resource://gre/modules/NewTabUtils.sys.mjs", 2001))
 1707238038733	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1707241911138	Marionette	INFO	Stopped listening on port 60722
+Dynamically enable window occlusion 1
+1707242209250	geckodriver	INFO	Listening on 127.0.0.1:60713
+1707242209751	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofileexVloP"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707242210088	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707242210157	Marionette	INFO	Listening on port 60721
+Read port: 60721
+WebDriver BiDi listening on ws://127.0.0.1:60714
+1707242210225	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:60714/devtools/browser/8fbdf4bb-a100-4e73-9a17-f50adf64cdd4
+1707242241447	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1707242336046	Marionette	INFO	Stopped listening on port 60721
+Dynamically enable window occlusion 1
+1707242344652	geckodriver	INFO	Listening on 127.0.0.1:60889
+1707242345155	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofileFsRdqD"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707242345470	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707242345550	Marionette	INFO	Listening on port 60895
+WebDriver BiDi listening on ws://127.0.0.1:60890
+Read port: 60895
+1707242345707	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:60890/devtools/browser/523f3abd-773c-46d5-b7b1-90dd5c7e74df
+console.error: (new TypeError("linkMap is undefined", "resource://gre/modules/NewTabUtils.sys.mjs", 2001))
+1707242375777	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1707242518388	Marionette	INFO	Stopped listening on port 60895
+Dynamically enable window occlusion 1
+1707245304807	geckodriver	INFO	Listening on 127.0.0.1:59394
+1707245305311	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofile0kd9Tb"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707245305637	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707245305701	Marionette	INFO	Listening on port 59402
+WebDriver BiDi listening on ws://127.0.0.1:59395
+Read port: 59402
+1707245305835	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59395/devtools/browser/5ee239c7-0e2b-4769-8480-347614abbd91
+1707245336978	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.error: ({})
+console.error: (new TypeError("linkMap is undefined", "resource://gre/modules/NewTabUtils.sys.mjs", 2001))
+1707245390947	Marionette	INFO	Stopped listening on port 59402
+Dynamically enable window occlusion 1
+1707245438060	geckodriver	INFO	Listening on 127.0.0.1:59470
+1707245438558	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofileZFECIK"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707245438878	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707245438948	Marionette	INFO	Listening on port 59476
+WebDriver BiDi listening on ws://127.0.0.1:59471
+Read port: 59476
+1707245439105	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59471/devtools/browser/c3f07203-6468-4088-ab56-c6822c84b7cf
+1707245456490	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1707245468934	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+1707245652872	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+1707245710915	Marionette	INFO	Stopped listening on port 59476
+Dynamically enable window occlusion 1
+1707247898961	geckodriver	INFO	Listening on 127.0.0.1:60033
+1707247899476	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofile1scLsq"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707247899861	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707247899953	Marionette	INFO	Listening on port 60039
+WebDriver BiDi listening on ws://127.0.0.1:60034
+Read port: 60039
+1707247900123	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:60034/devtools/browser/50fb1d37-faa6-40d0-ac1d-9bed42b618f9
+1707247930450	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+console.error: ({})
+console.error: ({})
+1707248308549	Marionette	INFO	Stopped listening on port 60039
+Dynamically enable window occlusion 1
+1707248446794	geckodriver	INFO	Listening on 127.0.0.1:50416
+1707248447298	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--width=1920" "--height=1080" "--remote-de ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofileiHSL6d"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707248447711	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707248447799	Marionette	INFO	Listening on port 50425
+WebDriver BiDi listening on ws://127.0.0.1:50417
+Read port: 50425
+1707248447958	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50417/devtools/browser/33bcd9be-981f-44db-be21-416140f0d413
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 6208 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 3373 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771, line 47: Script terminated by timeout at:
+Sa.prototype.flush@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:47:28
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:466
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+qd/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:96:671
+
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 5971 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js, line 77: Script terminated by timeout at:
+og@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:77:1095
+hi@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:135:193
+h.aa@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:135:1509
+le@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:45:16
+ie@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:45:465
+ge/b<@https://s0.2mdn.net/879366/dfa7banner_html_inpage_rendering_lib_200_268.js:42:292
+
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 5266 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914, line 46: Script terminated by timeout at:
+Ta@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:517
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:419
+k@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:242:1946
+pn/</m</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:242:2214
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pf.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:121:115
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Ve.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:113:248
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+n.sa@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:120:219
+Zc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:90:1054
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+n.sa@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:120:219
+Zc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:90:1054
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Ve.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:113:248
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Rh/c/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:320
+Va@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:339
+Sa.prototype.flush@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:127
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:466
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Ve.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:113:248
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Ve.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:113:248
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+nd.prototype.sa@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:96:172
+Zc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:90:1054
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+qd/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:96:671
+
+1707248472968	Marionette	INFO	Stopped listening on port 50425
+Dynamically enable window occlusion 1
+1707248979620	geckodriver	INFO	Listening on 127.0.0.1:62375
+1707248980128	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--width=1920" "--height=1080"  ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofilenH4Vnj"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707248980456	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707248980533	Marionette	INFO	Listening on port 62381
+Read port: 62381
+WebDriver BiDi listening on ws://127.0.0.1:62376
+1707248980597	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:62376/devtools/browser/aafdc79b-bf10-4484-b594-f27930642a76
+JavaScript error: resource://gre/actors/ContentMetaChild.sys.mjs, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1707248985781	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1707248986056	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js, line 76: Script terminated by timeout at:
+n.complete@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:71
+n.D@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:326
+n.complete@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:98
+R.prototype.U@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:92:43
+n.U@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:101:417
+$c.prototype.D@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:91:39
+n.complete@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:98
+Rh/c/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:152:430
+Va@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:47:339
+Sa.prototype.flush@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:47:127
+Ua@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:466
+Rh/c/</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:152:292
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+Xg/</</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:237
+Ra.prototype.Zb/<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:298
+Xg/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:246
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+Xg/</</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:237
+Ra.prototype.Zb/<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:298
+Xg/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:246
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+qd/</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:96:671
+
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 2946 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1707248990966	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914, line 46: Script terminated by timeout at:
+Ta@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:517
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:419
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:81:916
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:110:194
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+n.sa@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:120:219
+Zc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:90:1054
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:88:601
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Rh/c/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:320
+Va@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:339
+Sa.prototype.flush@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:127
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:466
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+qd/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:96:671
+
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 3466 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1707249010685	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1707249010981	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1707249011355	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1707249031932	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1707249053092	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+ly enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707249004931	Marionette	INFO	Listening on port 62652
+WebDriver BiDi listening on ws://127.0.0.1:62647
+Read port: 62652
+1707249005053	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:62647/devtools/browser/93a9915a-0460-4084-9a9b-5e666b36b3ed
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://cdn-apac.onetrust.com/scripttemplates/202312.1.0/otBannerSdk.js, line 7: TypeError: this.selector is null
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 2427 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 3522 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js, line 75: Script terminated by timeout at:
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:842
+Pc.prototype.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:88:601
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+n.sa@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:94:135
+$c.prototype.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:90:1342
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+Rh/c/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:152:320
+Va@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:47:339
+Sa.prototype.flush@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:47:127
+Ua@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:466
+Rh/c/</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:152:292
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+Xg/</</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:237
+Ra.prototype.Zb/<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:298
+Xg/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:246
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+Xg/</</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:237
+Ra.prototype.Zb/<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:46:298
+Xg/</</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:138:246
+n.Id@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:78:425
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:77:439
+n.o@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:76:223
+n.next@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:75:859
+qd/</<@https://pagead2.googlesyndication.com/pagead/managed/js/activeview/current/ufs_web_display.js:96:671
+
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript warning: https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771, line 236: Script terminated by timeout at:
+Wm@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:236:322
+Eo/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:262:462
+Pc.prototype.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:88:513
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+Rh/c/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:152:320
+Va@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:47:339
+Sa.prototype.flush@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:47:127
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:466
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:75:859
+qd/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=44809771:96:671
+
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 1751 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914, line 81: Script terminated by timeout at:
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:81:903
+n.fi@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:83:1940
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Rh/c/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:320
+Va@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:339
+Sa.prototype.flush@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:47:127
+Ua@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:466
+Rh/c/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:152:292
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+Xg/</</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:237
+Ra.prototype.Zb/<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:46:298
+Xg/</</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:138:246
+n.Id@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:78:425
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:77:439
+n.o@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:76:223
+n.next@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:75:859
+qd/</<@https://www.googletagservices.com/activeview/js/current/ufs_web_display.js?cache=r20110914:96:671
+
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript error: https://static.coingecko.com/s/application-3f82b1299018dee2b3978a69b713ef1b6b6dcb49d36a8a7eb56c945192bf2204.js, line 1: ReferenceError: CKEDITOR is not defined
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IHSjRKKj3q_1Pt3c2sGWHmUCy_Bw5n5yhKh9CWyZSw4.js line 2 > eval line 1529 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1707249035281	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1707249036840	geckodriver	INFO	Listening on 127.0.0.1:63047
+1707249037327	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--width=1920" "--height=1080"  ...  "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\uzcheng\\AppData\\Local\\Temp\\rust_mozprofileKSx4Pb"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1707249037998	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+console.error: "Warning: unrecognized command line flag" "-width"
+console.error: "Warning: unrecognized command line flag" "-height"
+1707249038108	Marionette	INFO	Listening on port 63053
+WebDriver BiDi listening on ws://127.0.0.1:63048
+Read port: 63053
+1707249038386	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:63048/devtools/browser/bc84adec-0c5c-4fae-99f0-e5f51f97072b
+console.error: ({})
+JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 60: Error: Can't find profile directory.
+console.error: ({})
+console.error: ({})
+1707249062411	Marionette	INFO	Stopped listening on port 63053
+Dynamically enable window occlusion 1

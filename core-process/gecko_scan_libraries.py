@@ -4,12 +4,11 @@
 @github: https://github.com/chengmarc
 
 """
-import re, io, os, sys, time, datetime, configparser, getpass, threading, random
+import re, io, os, sys, time, datetime, configparser, getpass, threading
 from urllib.parse import urlparse
 
 try:
     import tkinter
-    import requests
     import pandas as pd
     from bs4 import BeautifulSoup as bs
     print("SYSTEM: Core modules imported.")
@@ -35,10 +34,6 @@ The graph below is an overview of the call structure of the functions.
 │
 ├───trim_dataframe()                # clean a given dataframe
 │
-├───recursive_download()            # download database
-│   │
-│   └───get_filename()              # get the file name of a given page
-│
 ├───config_create()                 # detect config and create one if not exist
 ├───config_read_check()             # read from section [Checks] in config
 ├───config_read_path()              # read from section [Paths] in config
@@ -46,39 +41,6 @@ The graph below is an overview of the call structure of the functions.
 │
 ├───get_datetime()                  # get current datetime
 """
-
-
-# %% Fake headers to bypass CloudFlare
-base_url = "https://www.coingecko.com/"
-
-agent_list = [
-    {'User-Agent': 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 9_8_3) Gecko/20100101 Firefox/57.8'},
-    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.4; Win64; x64; en-US) Gecko/20130401 Firefox/50.0'},
-    {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 10.4;) AppleWebKit/602.7 (KHTML, like Gecko) Chrome/50.0.3427.158 Safari/535'},
-    {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 9_9_0) AppleWebKit/534.47 (KHTML, like Gecko) Chrome/52.0.1333.275 Safari/537'},
-    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.2; WOW64) AppleWebKit/536.31 (KHTML, like Gecko) Chrome/50.0.1826.173 Safari/534'},
-    {'User-Agent': 'Mozilla/5.0 (Linux; U; Linux x86_64; en-US) AppleWebKit/603.40 (KHTML, like Gecko) Chrome/48.0.1697.142 Safari/537'},
-    {'User-Agent': 'Mozilla/5.0 (Windows; Windows NT 10.0; Win64; x64; en-US) AppleWebKit/603.29 (KHTML, like Gecko) Chrome/52.0.2305.265 Safari/601'},
-    {'User-Agent': 'Mozilla/5.0 (Windows; Windows NT 10.4;; en-US) AppleWebKit/603.14 (KHTML, like Gecko) Chrome/49.0.2454.349 Safari/600'},
-    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.3; WOW64) AppleWebKit/600.15 (KHTML, like Gecko) Chrome/54.0.3775.310 Safari/600.0 Edge/11.48575'},
-    {'User-Agent': 'Mozilla/5.0 (Windows NT 10.5;) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/51.0.1326.199 Safari/537.8 Edge/12.30568'}]
-
-headers = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Accept-Language': 'en-CA,en-US;q=0.7,en;q=0.3',
-    'Alt-Userd': 'www.coingceko.com',
-    'Connection': 'keep-alive',
-    'Cookie': '_session_id=5bdb2abf405a2d9e6824309986d26ccb; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Feb+06+2024+08%3A40%3A38+GMT-0500+(Eastern+Standard+Time)&version=202312.1.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=b43e2efa-81af-45cd-8f91-4ea1d60ea6a0&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0004%3A0%2CC0003%3A1&AwaitingReconsent=false; __cf_bm=8vFmBQvD0t925PV.lonDVn6L61j8X5N0evU_3kgoewc-1707226826-1-AVrry33UfNU8MD+TKHQP+N/zgo0MtXYo+aGs+L1kaJ8AQi4xD5oE7VrYJCpMe92bEBfI2yclbKhun5mMLMBmGwU=',
-    'DNT': '1',
-    'Host': 'www.coingecko.com',
-    'Referer': 'https://www.coingecko.com/',
-    'Sec-Fetch-Dest': 'document',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'same-origin',
-    'Sec-Fetch-User': '?1',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'}
 
 
 # %% Functions for getting key information in each category
@@ -272,69 +234,6 @@ def trim_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# %% Functions for database and recursive process
-
-
-def get_filename(response: requests.Response, url: str) -> str:
-    """
-    This function takes an response object and returns the file name contained in it.
-
-    Precondition:   response is a response object obtained by requests.get(url)
-    Return:         a string that represents the file name
-
-    #Example
-    input:  a response object obatined by requests.get("https://www.coingecko.com/price_charts/export/N/usd.csv")
-    output: "btc-usd-max.csv"
-    """
-    number_match = re.search(r"\/(\d+)\/", url)
-    number = str(number_match.group(1)).zfill(5) + "-"
-
-    if response.headers.get("Content-Disposition"):
-        content_disposition = response.headers.get("Content-Disposition")
-        filename_match = re.search(r'filename="(.+)"', content_disposition)
-        filename = filename_match.group(1)
-    else:
-        current_time = datetime.datetime.now().strftime("%H-%M-%S")
-        filename = f"no-name-{current_time}"
-    return number + filename
-
-
-def recursive_download(driver, url_list: list[str], output_path: str):
-    """
-    This function takes a list of valid urls and downloads the corresponding .csv files contained to a given path.
-
-    Precondition:   url_list is a list of urls of the following format:
-                    https://www.coingecko.com/price_charts/export/N/usd.csv
-                    where N is a positive integer number
-    """
-    if not url_list:
-        return
-
-    url = url_list[0]
-    response = requests.get(url, headers=agent_list[random.randint(0, 9)], stream=True)
-    response.status_code
-
-    if response.status_code == 200:
-        url_list.pop(0)
-        output_name = get_filename(response, url)
-        df = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
-        df.to_csv(os.path.join(output_path, output_name), encoding="utf-8")
-        info_database(200, url)
-        time.sleep(0.5)
-    elif response.status_code == 404:
-        url_list.pop(0)
-        info_database(404, url)
-        time.sleep(0.5)
-    elif response.status_code == 403:
-        info_database(403, url)
-        time.sleep(0.5)
-    elif response.status_code == 429:
-        info_database(429, url)
-        time.sleep(20)
-
-    return recursive_download(url_list, output_path)
-
-
 # %% Function for output path and output time
 
 
@@ -352,7 +251,7 @@ def config_create() -> None:
                    "[Paths]\n"
                    r"output_path_all_crypto=C:\Users\Public\Documents" + "\n"
                    r"output_path_categories=C:\Users\Public\Documents" + "\n"
-                   r"output_path_database=C:\Users\Public\Documents" + "\n")
+                   r"output_path_database=Download Folder (This PC)" + "\n")
         with open(config_file, "w") as f:
             f.write(content)
             f.close()
@@ -438,9 +337,9 @@ def notice_url_success(n) -> None:
     print("")
 
 
-def notice_batch_size(n) -> None:
-    print("INFO: Successfully created batches.")
-    print(f"INFO: {n} batches has been loaded.")
+def notice_html_read_success(n) -> None:
+    print("INFO: Successfully read pre-defined links.")
+    print(f"INFO: {n} URLs has been loaded.")
     print("")
 
 
@@ -462,13 +361,8 @@ def info_category(category:str) -> None:
     print(f"INFO: Successfully extracted data for {category}")
 
 
-def info_database(code, url) -> None:
-    if code == 200:
-        print(f"INFO: Downloaded {url}")
-    elif code == 404:
-        print(f"INFO: Discarded {url}")
-    elif code == 403 or code == 429:
-        print(f"INFO: Skipped {url}")
+def info_database(url) -> None:
+    print(f"INFO: Processed {url}")
 
 
 def info_data_ready() -> None:

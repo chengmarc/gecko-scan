@@ -17,6 +17,8 @@ from webdrivers.webdriver_initializer import start_webdriver, quit_webdriver
 
 config_create()
 
+html_path = os.path.join(os.path.dirname(script_path), 'links-creation', 'links.html')
+
 
 def execute():
     driver = start_webdriver()
@@ -24,7 +26,7 @@ def execute():
                 text1.get(), text2.get(), text3.get())
     if accept1.get() == "Accepted": main1(driver, text1.get())
     if accept2.get() == "Accepted": main2(driver, text2.get())
-    if accept3.get() == "Accepted": main3(text3.get())
+    if accept3.get() == "Accepted": main3(driver, html_path)
     quit_webdriver(driver)
 
 
@@ -40,7 +42,7 @@ def exit():
 
 # %% Initialize Window
 root = tk.Tk()
-root.title("GeckoScan v1.21")
+root.title("GeckoScan v1.3")
 root.iconbitmap("gecko_scan_icon.ico")
 root.resizable(width=False, height=False)
 
@@ -128,7 +130,7 @@ def save_location(frame):
     global text1, text2, text3
     text1 = tk.Entry(frame, textvariable=path1)
     text2 = tk.Entry(frame, textvariable=path2)
-    text3 = tk.Entry(frame, textvariable=path3)
+    text3 = tk.Entry(frame, textvariable=path3, state=tk.DISABLED)
 
     text1.grid(row=0, column=1, sticky="we", padx=5, pady=1)
     text2.grid(row=1, column=1, sticky="we", padx=5, pady=1)
